@@ -20,20 +20,22 @@ function App() {
   //  es decir, para realizar tareas como obtener datos desde una API
   useEffect(() => {
     const fetchDatosUsuarios = async () => {
-      const data = await getJson(rutaUsuarios, masterKey);
-      setUsuarios(data.record);
-    };
+      const data = await getJson(rutaUsuarios, masterKey)
+      setUsuarios(data.record)
+    }
 
-    fetchDatosUsuarios();
+    fetchDatosUsuarios()
 
 
     const fetchDatosViajes = async () => {
-      const data = await getJson(rutaViajes, masterKey);
-      setViajes(data.record);
-    };
+      const data = await getJson(rutaViajes, masterKey)
+      setViajes(data.record)
+    }
 
-    fetchDatosViajes();
-  }, []);
+    fetchDatosViajes()
+  },
+    // Al enviarlo vacio no esta pendiente de ningun cambio por lo que se ejecuta 1 sola vez
+    [])
 
 
   if (usuarios === null || viajes === null) {
@@ -43,10 +45,13 @@ function App() {
   else {
     return (<>
       <Router>
-        <div className='sm:p-10 lg:p-40 md:p-30 p-5'>
+        <div className='sm:p-5 lg:p-20 md:p-10 p-5'>
           <NavPrincipal usuarioConectado={usuarioConectado} setUsuarioConectado={setUsuarioConectado} />
           <Cuerpo viajes={viajes}
-            usuarioConectado={usuarioConectado} setUsuarioConectado={setUsuarioConectado} usuarios={usuarios} setUsuarios={setUsuarios}
+            usuarioConectado={usuarioConectado}
+            setUsuarioConectado={setUsuarioConectado}
+            usuarios={usuarios}
+            setUsuarios={setUsuarios}
           />
         </div>
 

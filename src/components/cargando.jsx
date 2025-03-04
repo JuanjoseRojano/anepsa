@@ -1,39 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-// Componente con animación de carga
 function Cargando() {
-    // Estilos para la animación dentro del componente
-    const spinnerStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-    };
-
-    const spinnerCircleStyle = {
-        border: '8px solid #f3f3f3', // Fondo
-        borderTop: '8px solid #3498db', // Color del spinner
-        borderRadius: '50%',
-        width: '50px',
-        height: '50px',
-        animation: 'spin 2s linear infinite', // Animación de giro
-    };
-
-    const keyframesStyle = `
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  `;
-
     return (
-        <div style={spinnerStyle}>
-            <style>{keyframesStyle}</style> {/* Agregamos los estilos de animación directamente */}
-            <div style={spinnerCircleStyle}></div>
-            <p>Cargando...</p>
+        <div className="flex flex-col justify-center items-center h-screen space-y-4">
+            <div className="flex space-x-3">
+                <div className="w-6 h-6 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="w-6 h-6 bg-green-500 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="w-6 h-6 bg-red-500 rounded-full animate-bounce"></div>
+            </div>
+            <h1 className="text-xl font-semibold text-gray-700">
+                Cargando base de datos...
+            </h1>
         </div>
-    );
+    )
+
+
+
 }
 
 export default Cargando;
