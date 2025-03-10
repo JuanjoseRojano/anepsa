@@ -5,22 +5,32 @@ import Linea from '../linea'
 function DestinoAleatorio(props) {
 
     const [destinoAleatorio, setDestinoAleatorio] = useState(null)
-    const [destinoSeleccionado, setDestinoSeleccionado] = useState(null)
+    const [destinoSeleccionado, setDestinoSeleccionado] = useState(props.viajes[0].destino)
+    const [precio, setPrecio] = useState(null)
+    const [precioTotal, setPrecioTotal] = useState(null)
+    const [imagen, setImagen] = useState(null)
 
-    let destinoRef = useRef(null)
+    const numeroBillete = 1
+
+    const destinoRef = useRef(null)
     const salidaRef = useRef(null)
     const horarioSalidaRef = useRef(null)
+    const diaRef = useRef(null)
 
     function mostrarSalida(event) {
         setDestinoSeleccionado(event.target.value)
+
+        const viajeSeleccionado = props.viajes.find(viaje => viaje.destino === event.target.value)
+
+        setPrecio(viajeSeleccionado.precio)
+        setPrecioTotal(viajeSeleccionado.precio * 1.21)
+        setImagen(viajeSeleccionado.imagen)
     }
 
     useEffect(() => {
 
         function seleccionarDestinoAleatorio() {
-            if (props.viajes !== null) {
-                setDestinoAleatorio(props.viajes[Math.floor(Math.random() * props.viajes.length)].destino)
-            }
+            setDestinoAleatorio(props.viajes[Math.floor(Math.random() * props.viajes.length)].destino)
         }
         const intervalId = setInterval(seleccionarDestinoAleatorio, 3000);
 
@@ -41,9 +51,7 @@ function DestinoAleatorio(props) {
                 <Linea />
 
                 <p className="text-xl text-gray-600">¿Dónde quieres ir?</p>
-                {/* <form > */}
                 <form className="flex flex-wrap items-center space-x-5 ">
-                    {/* ESTOS SELECT NO TIENEN  */}
                     <label className="text-lg font-medium text-gray-700">Entrada:</label>
                     <select ref={destinoRef} onChange={mostrarSalida} className="p-2 border rounded-md">
                         {props.viajes.map((element) => {
@@ -52,7 +60,13 @@ function DestinoAleatorio(props) {
                             )
                         })}
                     </select>
-                    <SalidaDestinoAleatorio destinoSeleccionado={destinoSeleccionado} horarioSalidaRef={horarioSalidaRef} salidaRef={salidaRef} viajes={props.viajes} />
+
+
+                    <SalidaDestinoAleatorio destinoSeleccionado={destinoSeleccionado}
+                        horarioSalidaRef={horarioSalidaRef}
+                        salidaRef={salidaRef}
+                        diaRef={diaRef}
+                        viajes={props.viajes} />
                 </form>
             </div>
 

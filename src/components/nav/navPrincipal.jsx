@@ -54,8 +54,8 @@ function NavPrincipal(props) {
                         <h1 className="text-white text-3xl font-bold">Anepsa</h1>
                     </Link>
 
-                    <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0 w-full sm:w-auto">
-
+                    {/* <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0 w-full sm:w-auto"> */}
+                    <div class="grid grid-cols-2 lg:flex lg:flex-col lg:sm:flex-row w-full lg:space-x-6 lg:justify-between">
                         {logInOLogOut}
 
                         <Link to="/TusViajes" className="w-full sm:w-auto">
@@ -65,7 +65,7 @@ function NavPrincipal(props) {
                             <SeccionNav imagenNav={ticket} nombreSeccionNav="Reservar viajes" />
                         </Link>
                         <Link to="/ViajesComunes" className="w-full sm:w-auto">
-                            <SeccionNav imagenNav={staff} nombreSeccionNav="Viajes de usuarios" />
+                            <SeccionNav imagenNav={staff} nombreSeccionNav="Viajes más frecuentes" />
                         </Link>
                     </div>
                 </div>

@@ -27,9 +27,10 @@ function MostrarUsuario(props) {
             setViajesEncontrados(<div>
                 {props.usuarioConectado.viajes.map((element) => {
                     return (<>
-                        <div>
+                        <div className='m-1.5'>
                             <h1 className="">Destino: {element.destino}</h1>
-                            <img src={element.imagen} alt={element.destino} />                            <div>
+                            <img src={element.imagen} alt={element.destino} className="w-full h-40 object-cover rounded-md mb-4" />
+                            <div className=''>
                                 <div>
                                     <span className={estilosSpan}>Salida: {element.salida}</span>
                                     <span className={estilosSpan}>Hora de llegada: {element.horariosDeVuelo}</span>
@@ -53,13 +54,12 @@ function MostrarUsuario(props) {
 
     const estilosSpan = "ml-2 text-gray-700 font-medium bg-blue-100 border-l-4 border-blue-500 px-2 py-1 rounded-lg"
     return (<>
-        <div className="border rounded-lg shadow-md overflow-hidden w-200 bg-white my-10 p-2 h-150">
+        <div className="border rounded-lg shadow-md overflow-hidden w-200 bg-white my-10 p-2 h-150 m-1.5">
             <div className="p-2 flex  flex-col">
 
                 <span className={estilosSpan}>Nombre de usuario: {props.usuarioConectado.nombreUsuario}</span>
                 <div className='flex flex-col'>
-                    <span className={estilosSpan}>                            Número de viajes activos:
-                        {props.usuarioConectado.viajes.length}</span>
+                    <span className={estilosSpan}>Número de viajes activos: {props.usuarioConectado.viajes.length}</span>
                     <Boton funcionBoton={eliminarUnUsuario} nombreBoton="Eliminar usuario" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all mt-4 w-40" />
                     <h1 className="text-xl md:text-2xl font-bold text-blue-600 bg-blue-100 border-l-4 border-blue-500 p-4 rounded-lg shadow-md my-2">
                         Parece que todavía no tienes viajes reservados
@@ -70,7 +70,7 @@ function MostrarUsuario(props) {
             <div className="w-full h-100 overflow-hidden overflow-y-auto">
                 {viajesEncontrados}
             </div>
-        </div>
+        </div >
     </>)
 }
 

@@ -64,19 +64,18 @@ function ViajesComunes(props) {
 
 
     const data = {
-        labels: localizacion, // Etiquetas del eje X
+        labels: localizacion,
         datasets: [
             {
                 label: 'Viajes Comunes',
-                data: numeroViajes, // Datos del gráfico
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de las barras
-                borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
-                borderWidth: 1, // Ancho del borde
+                data: numeroViajes,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
             },
         ],
-    };
+    }
 
-    // Opciones del gráfico
     const options = {
         responsive: true,
         plugins: {
@@ -88,20 +87,13 @@ function ViajesComunes(props) {
                 enabled: true,
             },
         },
-    };
+    }
 
     return (
-        <div>
-            <h1 className="uppercase text-white bg-gray-900 p-4 rounded-lg shadow-md">
-                Todo Correcto
-            </h1>
-
-            {/* Aquí se inserta el gráfico */}
-            <div className="mt-8">
-                <Bar data={data} options={options} />
-            </div>
+        <div className="mt-8">
+            <Bar data={data} options={options} />
         </div>
-    );
+    )
 
 
 

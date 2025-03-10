@@ -4,7 +4,7 @@ import Cargando from './components/cargando'
 import NavPrincipal from './components/nav/navPrincipal'
 import Cuerpo from './components/cuerpo/cuerpo'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
+import FooterPersonalizado from './components/footer';
 import './index.css'
 import './App.css'
 
@@ -13,7 +13,6 @@ function App() {
   const [usuarios, setUsuarios] = useState(null)
   const [viajes, setViajes] = useState(null)
   const [usuarioConectado, setUsuarioConectado] = useState(null)
-  // const [esperarLogOut, setEsperarLogOut] = useState(false)
 
   // Debo utilizar useEffect para realizar funciones de peticion ya que me permite
   // desde aqui cambiar el state al ejecutar efectos secundarios de manera controlada,
@@ -54,6 +53,7 @@ function App() {
             setUsuarios={setUsuarios}
           />
         </div>
+        <FooterPersonalizado></FooterPersonalizado>
 
       </Router>
     </>)
