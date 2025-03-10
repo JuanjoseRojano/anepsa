@@ -4,7 +4,6 @@ import Cargando from './components/cargando'
 import NavPrincipal from './components/nav/navPrincipal'
 import Cuerpo from './components/cuerpo/cuerpo'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import FooterPersonalizado from './components/footer';
 import './index.css'
 import './App.css'
 
@@ -53,7 +52,6 @@ function App() {
             setUsuarios={setUsuarios}
           />
         </div>
-        <FooterPersonalizado></FooterPersonalizado>
 
       </Router>
     </>)
