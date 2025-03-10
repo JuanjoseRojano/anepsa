@@ -6,9 +6,15 @@ function ReservarViajes(props) {
 
     return (
         <>
-            {props.viajes.map((element) => (
-                <FormularioDeReserva element={element} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} />
-            ))}
+            <div className="flex justify-center items-center min-h-screen p-3">
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4  justify-center p-3">
+
+                    {props.viajes.map((element) => (
+                        <FormularioDeReserva element={element} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} />
+                    ))}                </div>
+            </div>
+
         </>
     )
 }

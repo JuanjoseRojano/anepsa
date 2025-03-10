@@ -26,7 +26,6 @@ function NavPrincipal(props) {
     }
 
     useEffect(() => {
-        console.log(props.usuarioConectado)
     },
         [props.usuarioConectado,
         ])
@@ -48,7 +47,7 @@ function NavPrincipal(props) {
     return (
         <>
             <div className="bg-gray-800 bg-opacity-80 shadow-lg p-4 sticky top-0 z-50">
-                <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0 w-full sm:w-auto">
+                <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:flex-row sm:space-x-6 sm:space-y-0 sm:w-auto sm:justify-between">
 
                     <Link to="/inicio" className="flex items-center space-x-3">
                         <img src={logo} alt="Logo" className="w-16 h-16 rounded-full" />

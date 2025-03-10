@@ -29,8 +29,7 @@ function MostrarUsuario(props) {
                     return (<>
                         <div>
                             <h1 className="">Destino: {element.destino}</h1>
-                            {/* Agregar imagen */}
-                            <div>
+                            <img src={element.imagen} alt={element.destino} />                            <div>
                                 <div>
                                     <span className={estilosSpan}>Salida: {element.salida}</span>
                                     <span className={estilosSpan}>Hora de llegada: {element.horariosDeVuelo}</span>
@@ -56,10 +55,7 @@ function MostrarUsuario(props) {
     return (<>
         <div className="border rounded-lg shadow-md overflow-hidden w-200 bg-white my-10 p-2 h-150">
             <div className="p-2 flex  flex-col">
-                <img
-                    src={login}
-                    className="h-8 w-8"
-                />
+
                 <span className={estilosSpan}>Nombre de usuario: {props.usuarioConectado.nombreUsuario}</span>
                 <div className='flex flex-col'>
                     <span className={estilosSpan}>                            Número de viajes activos:

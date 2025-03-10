@@ -64,7 +64,7 @@ function Login(props) {
 
     useEffect(() => {
         if (props.usuarios.length > 0) {
-            uploadJson(rutaUsuarios, masterKey, props.usuarios);
+            uploadJson(rutaUsuarios, masterKey, props.usuarios)
 
         }
     }, [props.usuarios])

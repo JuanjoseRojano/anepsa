@@ -28,7 +28,7 @@ export async function getJson(url, masterKey) {
     } catch (error) {
         console.error("Error:", error.message);
     }
-};
+}
 
 
 
@@ -65,10 +65,12 @@ export function comprarBilletes(
     setUsuarioConectado,
     refDestino,
     refSalida,
+    refImagenDestino,
     refHoraSalida,
     refDiaSemana,
     refPrecioBilleteFinal,
     refNumeroBilletes,
+    refPrecioOriginal,
     setErrorDeFormulario
 ) {
 
@@ -90,8 +92,8 @@ export function comprarBilletes(
             setErrorDeFormulario("El usuario ya tiene un viaje reservado igual que este")
             return
         } else {
-            if (refNumeroBilletes.current.value > 20) {
-                setErrorDeFormulario("Solo se permiten 20 billetes en un vuelo por usuario")
+            if (refNumeroBilletes === 0) {
+                setErrorDeFormulario("Debe agregar mínimo 1 billete máximo 20")
                 return
             }
 
@@ -104,11 +106,13 @@ export function comprarBilletes(
                         salida: refSalida.current.value,
                         horariosDeVuelo: refHoraSalida.current.value,
                         diasDeLaSemana: refDiaSemana.current.value,
-                        numeroBilletes: refNumeroBilletes.current.value,
-                        precioTotal: refPrecioBilleteFinal.current.innerText
+                        numeroBilletes: refNumeroBilletes,
+                        precio: refPrecioOriginal.current.innerText,
+                        precioTotal: refPrecioBilleteFinal.current.innerText,
+                        imagen: refImagenDestino.current.src
                     }
                 ]
-            };
+            }
 
             setUsuarioConectado(usuarioActualizado);
 
@@ -135,15 +139,128 @@ export function eliminarUsuario(
     usuarioConectado,
     setUsuarioConectado
 ) {
-    console.log(usuarios)
     const usuariosActualizados = usuarios.filter(
         (usuario) =>
             usuario.nombreUsuario !== usuarioConectado.nombreUsuario
     )
 
-    console.log(usuariosActualizados)
 
     setUsuarioConectado(null)
     setUsuarios(usuariosActualizados)
     uploadJson(rutaUsuarios, masterKey, usuariosActualizados)
+}
+
+
+
+export function eliminarBillete(
+    e,
+    destino,
+    salida,
+    horarioVuelo,
+    diaSemana,
+    usuarioConectado,
+    setUsuarioConectado,
+    usuarios,
+    setUsuarios
+) {
+
+    const usuarioViajeActualizado = usuarioConectado.viajes.filter(
+        (cambiarViaje) =>
+            !(cambiarViaje.destino === destino && cambiarViaje.salida === salida && cambiarViaje.horariosDeVuelo === horarioVuelo && cambiarViaje.diasDeLaSemana === diaSemana)
+    )
+
+
+    const usuarioActualizado = {
+        ...usuarioConectado,
+        viajes: usuarioViajeActualizado
+    }
+    setUsuarioConectado(usuarioActualizado)
+
+    setUsuarios((prev) => {
+        const subirUsuarios = prev.map((prevUsuario) => {
+            if (prevUsuario.nombreUsuario === usuarioActualizado.nombreUsuario) {
+                return usuarioActualizado;
+            } else {
+                return prevUsuario;
+            }
+        })
+        uploadJson(rutaUsuarios, masterKey, subirUsuarios)
+        return subirUsuarios
+    })
+
+    return usuarioActualizado
+}
+
+export function cambiarBillete(
+    e,
+    destino,
+    salida,
+    horarioVuelo,
+    diaSemana,
+    numeroBilletes,
+    precioOriginal,
+    precioTotal,
+    imagen,
+    usuarioConectado,
+    setUsuarioConectado,
+    usuarios,
+    setUsuarios
+) {
+    if (numeroBilletes != 0) {
+        const nuevoVueloActualizado = {
+            destino: destino,
+            salida: salida,
+            horariosDeVuelo: horarioVuelo,
+            diasDeLaSemana: diaSemana,
+            numeroBilletes: numeroBilletes,
+            precio: precioOriginal,
+            precioTotal: precioTotal,
+            imagen: imagen
+        }
+
+
+        const usuarioSinVuelo = eliminarBillete(
+            e,
+            destino,
+            salida,
+            horarioVuelo,
+            diaSemana,
+            usuarioConectado,
+            setUsuarioConectado,
+            usuarios,
+            setUsuarios
+        )
+
+        const usuarioActualizado = {
+            ...usuarioSinVuelo,
+            viajes: [...usuarioSinVuelo.viajes, nuevoVueloActualizado]
+        }
+
+        setUsuarioConectado(usuarioActualizado)
+
+        setUsuarios((prev) => {
+            const subirUsuarios = prev.map((prevUsuario) => {
+                if (prevUsuario.nombreUsuario === usuarioActualizado.nombreUsuario) {
+                    return usuarioActualizado;
+                } else {
+                    return prevUsuario;
+                }
+            })
+            uploadJson(rutaUsuarios, masterKey, subirUsuarios)
+            return subirUsuarios
+        })
+    }
+    else {
+        eliminarBillete(
+            e,
+            destino,
+            salida,
+            horarioVuelo,
+            diaSemana,
+            usuarioConectado,
+            setUsuarioConectado,
+            usuarios,
+            setUsuarios
+        )
+    }
 }

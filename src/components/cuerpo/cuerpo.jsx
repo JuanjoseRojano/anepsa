@@ -5,7 +5,8 @@ import Muestras from './muestras'
 import Prueba from '../prueba'
 import Login from '../logearUsuario/login'
 import ReservarViajes from './reservarVuelos/reservarViajes'
-import TusViajes from './tusViajes'
+import TusViajes from './tusViajes/tusViajes'
+import ViajesComunes from './viajesComunes/viajesComunes'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 function Cuerpo(props) {
@@ -37,15 +38,17 @@ function Cuerpo(props) {
                         />
                     </div>
                     <Muestras viajes={props.viajes} />
+
+
                 </div>
             </>} />
 
 
 
             <Route path='/LogIn' element={<Login usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} usuarios={props.usuarios} setUsuarios={props.setUsuarios} />} />
-            <Route path='/TusViajes' element={<TusViajes usuarioConectado={props.usuarioConectado} viajes={props.viajes} />} />
+            <Route path='/TusViajes' element={<TusViajes usuarioConectado={props.usuarioConectado} viajes={props.viajes} setUsuarios={props.setUsuarios} setUsuarioConectado={props.setUsuarioConectado} />} />
             <Route path="/ReservarViajes" element={<ReservarViajes usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} />} />
-            <Route path="/GestionarViajes" element={<Prueba />} />
+            <Route path="/ViajesComunes" element={<ViajesComunes usuarios={props.usuarios} viajes={props.viajes} />} />
 
 
         </Routes>

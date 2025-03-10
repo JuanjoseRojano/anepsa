@@ -45,7 +45,7 @@ function App() {
   else {
     return (<>
       <Router>
-        <div className='sm:p-5 lg:p-20 md:p-10 p-5'>
+        <div >
           <NavPrincipal usuarioConectado={usuarioConectado} setUsuarioConectado={setUsuarioConectado} />
           <Cuerpo viajes={viajes}
             usuarioConectado={usuarioConectado}

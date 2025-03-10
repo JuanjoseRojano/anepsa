@@ -1,17 +1,9 @@
 import { useState, useEffect } from 'react'
 import Boton from '../Boton'
-
+import useClassNameError from '../../hooks/useClassNameError'
 function FormularioLogin(props) {
 
-    const [classNameError, setClassNameError] = useState("")
-    useEffect(() => {
-        setClassNameError("text-red-500 text-center font-semibold border border-red-500 rounded-lg p-2")
-    }, [props.error])
-
-    useEffect(() => {
-        setClassNameError("")
-    }, [])
-
+    const classNameError = useClassNameError(props.error);
 
     return (
         <div className="flex flex-col justify-center items-center  bg-gray-100 ">
