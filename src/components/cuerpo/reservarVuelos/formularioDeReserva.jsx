@@ -25,6 +25,7 @@ function FormularioDeReserva(props) {
     const { manejoBilletes, sumar, resta } = useManejoBilletes()
 
     const classNameError = useClassNameError(errorDeFormulario);
+    const diseñoBotonesPequeños = "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 "
 
     useEffect(() => {
         añadirIVA(manejoBilletes, props.element.precio)
@@ -39,14 +40,14 @@ function FormularioDeReserva(props) {
             props.setUsuarios,
             props.usuarioConectado,
             props.setUsuarioConectado,
-            nombreDestino,
-            nombreSalida,
-            imagenDestino,
-            horaDeSalida,
-            diaSemana,
-            precioDeBilleteFinal,
+            nombreDestino.current.innerText,
+            nombreSalida.current.value,
+            imagenDestino.current.src,
+            horaDeSalida.current.value,
+            diaSemana.current.value,
+            precioDeBilleteFinal.current.innerText,
             manejoBilletes,
-            precioOriginal,
+            precioOriginal.current.innerText,
             setErrorDeFormulario
         )
     }
@@ -80,20 +81,20 @@ function FormularioDeReserva(props) {
 
                     </div>
 
-                    <div className="flex flex-col gap-4 m-3">
-                        <div className='flex justify-center items-center space-x-2'>
+                    <div className="flex flex-col gap-4 m-3 bg-cyan-100 rounded-2xl">
+                        <div className='flex justify-center items-center space-x-2 m-1'>
                             <p className="text-lg font-medium text-gray-700">Precio billete:</p>
 
                             <h1 ref={precioOriginal} className='flex items-center p-1 bg-gradient-to-r from-green-200 via-blue-200 to-purple-200 rounded-xl'>{props.element.precio}</h1>
                         </div>
 
                         <div>
-                            <Boton nombreBoton="-" funcionBoton={resta} type={"button"} />
+                            <Boton nombreBoton="-" funcionBoton={resta} type={"button"} className={diseñoBotonesPequeños} />
                             <h1>{manejoBilletes}</h1>
-                            <Boton nombreBoton="+" funcionBoton={sumar} type={"button"} />
+                            <Boton nombreBoton="+" funcionBoton={sumar} type={"button"} className={diseñoBotonesPequeños} />
 
                         </div>
-                        <div className='flex justify-center items-center space-x-2'>
+                        <div className='flex justify-center items-center space-x-2 m-1 inset-shadow-cyan-500/50 shadow-xl '>
                             <p className="text-lg font-medium text-gray-700">Precio final:</p>
                             <div className='flex items-center p-1 bg-gradient-to-r from-green-200 via-blue-200 to-purple-200 border-solid rounded-xl'>
                                 <h1 ref={precioDeBilleteFinal} className="text-lg font-medium text-gray-700">{precioDeLosBilletes}</h1>
@@ -103,9 +104,6 @@ function FormularioDeReserva(props) {
                     </div>
 
                 </div>
-
-
-
 
                 <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md text-lg transition duration-300">
                     Comprar

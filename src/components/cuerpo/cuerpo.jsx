@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import DestinoAleatorio from './destinoAleatorio'
 import viajando from '../../media/viajando.jpg'
 import Muestras from './muestras'
 import Login from '../logearUsuario/login'
 import ReservarViajes from './reservarVuelos/reservarViajes'
 import TusViajes from './tusViajes/tusViajes'
 import ViajesComunes from './viajesComunes/viajesComunes'
+import DestinoAleatorio from './destinoAleatorioCompra/destinoAleatorio'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 function Cuerpo(props) {
@@ -29,7 +29,7 @@ function Cuerpo(props) {
                     <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white/100 to-transparent"></div>
 
                 </div>
-                {/* <DestinoAleatorio viajes={props.viajes}></DestinoAleatorio> */}
+                <DestinoAleatorio viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado}></DestinoAleatorio>
 
                 <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden">
                     <div className="w-2/5 shrink-0">

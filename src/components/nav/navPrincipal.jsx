@@ -1,75 +1,72 @@
-import { useState, useEffect } from 'react'
-import SeccionNav from './seccionNav'
-import login from '../../media/login.png'
-import viaje from '../../media/viaje.png'
-import ticket from '../../media/ticket.png'
-import staff from '../../media/staff.png'
-import logo from '../../media/logo.png'
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import SeccionNav from "./seccionNav"
+import login from "../../media/login.png"
+import viaje from "../../media/viaje.png"
+import ticket from "../../media/ticket.png"
+import staff from "../../media/staff.png"
+import logo from "../../media/logo.png"
 
-export default NavPrincipal
-
-
-function NavPrincipal(props) {
-
+export default function NavPrincipal(props) {
     const [logInOLogOut, setLogInOLogOut] = useState(null)
-
+    const [menuOpen, setMenuOpen] = useState(false)
     const navigate = useNavigate()
-
 
     function cerrarSesion(e) {
         e.preventDefault()
         props.setUsuarioConectado(null)
-        navigate(
-            "/inicio"
-        )
+        navigate("/inicio")
     }
 
     useEffect(() => {
-    },
-        [props.usuarioConectado,
-        ])
-
-    useEffect(() => {
-
         if (props.usuarioConectado === null) {
-            setLogInOLogOut(<Link to="/LogIn"><SeccionNav imagenNav={login} nombreSeccionNav={"Login"} className="flex-1" /></Link>
-            )
-        }
-        else {
-            setLogInOLogOut(<Link to="/Inicio"><SeccionNav imagenNav={login} nombreSeccionNav={"LogOut"} className="flex-1" onClick={cerrarSesion} /></Link>
-
+            setLogInOLogOut(
+                <Link to="/LogIn" onClick={() => setMenuOpen(false)}>
+                    <SeccionNav imagenNav={login} nombreSeccionNav="Login" />
+                </Link>
+            );
+        } else {
+            setLogInOLogOut(
+                <Link to="/Inicio" onClick={(e) => { cerrarSesion(e); setMenuOpen(false) }}>
+                    <SeccionNav imagenNav={login} nombreSeccionNav="LogOut" />
+                </Link>
             )
         }
     }, [props.usuarioConectado])
 
-
     return (
-        <>
-            <div className="bg-gray-800 bg-opacity-80 shadow-lg p-4 sticky top-0 z-50">
-                <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:flex-row sm:space-x-6 sm:space-y-0 sm:w-auto sm:justify-between">
+        <nav className="bg-gray-800 bg-opacity-80 shadow-lg sticky top-0 z-50 min-h-[64px] relative">
+            <div className="container mx-auto px-4 py-4 flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full">
 
                     <Link to="/inicio" className="flex items-center space-x-3">
                         <img src={logo} alt="Logo" className="w-16 h-16 rounded-full" />
                         <h1 className="text-white text-3xl font-bold">Anepsa</h1>
                     </Link>
 
-                    {/* <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0 w-full sm:w-auto"> */}
-                    <div class="grid grid-cols-2 lg:flex lg:flex-col lg:sm:flex-row w-full lg:space-x-6 lg:justify-between">
-                        {logInOLogOut}
+                    <button
+                        className="text-white text-3xl md:hidden focus:outline-none"
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
+                        {menuOpen ? "✖" : "☰"}
+                    </button>
+                </div>
 
-                        <Link to="/TusViajes" className="w-full sm:w-auto">
+                <div className={`absolute md:relative top-full left-0 w-full md:w-auto bg-gray-900 md:bg-transparent p-4 md:p-0 transition-all duration-300 ease-in-out ${menuOpen ? "block" : "hidden"} md:flex md:items-center md:space-x-6`}>
+                    <div className="flex flex-col md:flex-row md:items-center space-y-4 space-x-6 md:space-y-0 md:space-x-6">
+                        {logInOLogOut}
+                        <Link to="/TusViajes" className="block md:inline-block " onClick={() => setMenuOpen(false)}>
                             <SeccionNav imagenNav={viaje} nombreSeccionNav="Tus viajes" />
                         </Link>
-                        <Link to="/ReservarViajes" className="w-full sm:w-auto">
+                        <Link to="/ReservarViajes" className="block md:inline-block" onClick={() => setMenuOpen(false)}>
                             <SeccionNav imagenNav={ticket} nombreSeccionNav="Reservar viajes" />
                         </Link>
-                        <Link to="/ViajesComunes" className="w-full sm:w-auto">
+                        <Link to="/ViajesComunes" className="block md:inline-block" onClick={() => setMenuOpen(false)}>
                             <SeccionNav imagenNav={staff} nombreSeccionNav="Viajes más frecuentes" />
                         </Link>
                     </div>
                 </div>
             </div>
-        </>
+        </nav>
     )
 }

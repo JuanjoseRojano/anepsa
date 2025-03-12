@@ -66,7 +66,7 @@ export function comprarBilletes(
     refDestino,
     refSalida,
     refImagenDestino,
-    refHoraSalida,
+    refHoraDeSalida,
     refDiaSemana,
     refPrecioBilleteFinal,
     refNumeroBilletes,
@@ -82,10 +82,10 @@ export function comprarBilletes(
     } else {
         const viajeDuplicado = usuarioConectado.viajes.find((element) => {
             return (
-                element.destino === refDestino.current.innerText &&
-                element.salida.includes(refSalida.current.value) &&
-                element.horariosDeVuelo.includes(refHoraSalida.current.value) &&
-                element.diasDeLaSemana.includes(refDiaSemana.current.value)
+                element.destino === refDestino &&
+                element.salida.includes(refSalida) &&
+                element.horariosDeVuelo.includes(refHoraDeSalida) &&
+                element.diasDeLaSemana.includes(refDiaSemana)
             );
         });
         if (viajeDuplicado) {
@@ -102,14 +102,14 @@ export function comprarBilletes(
                 viajes: [
                     ...usuarioConectado.viajes,
                     {
-                        destino: refDestino.current.innerText,
-                        salida: refSalida.current.value,
-                        horariosDeVuelo: refHoraSalida.current.value,
-                        diasDeLaSemana: refDiaSemana.current.value,
+                        destino: refDestino,
+                        salida: refSalida,
+                        horariosDeVuelo: refHoraDeSalida,
+                        diasDeLaSemana: refDiaSemana,
                         numeroBilletes: refNumeroBilletes,
-                        precio: refPrecioOriginal.current.innerText,
-                        precioTotal: refPrecioBilleteFinal.current.innerText,
-                        imagen: refImagenDestino.current.src
+                        precio: refPrecioOriginal,
+                        precioTotal: refPrecioBilleteFinal,
+                        imagen: refImagenDestino
                     }
                 ]
             }
