@@ -30,30 +30,30 @@ function Cuerpo(props) {
 
                 </div>
                 <DestinoAleatorio viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado}></DestinoAleatorio>
-
-                <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-                    <div className="w-2/5 shrink-0">
-                        <img
-                            src="https://blog.oxfamintermon.org/wp-content/uploads/2018/12/viajes-alternativos-2.jpg"
-                            alt="card-image"
-                            className="h-full w-full object-cover"
-                        />
+                <div className='my-20'>
+                    <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden">
+                        <div className="w-2/5 shrink-0">
+                            <img
+                                src="https://blog.oxfamintermon.org/wp-content/uploads/2018/12/viajes-alternativos-2.jpg"
+                                alt="card-image"
+                                className="h-full w-full object-cover"
+                            />
+                        </div>
+                        <Muestras titulo={titulo1} subtitulo={subtitulo1} texto={texto1} />
                     </div>
-                    <Muestras titulo={titulo1} subtitulo={subtitulo1} texto={texto1} />
-                </div>
 
-                <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden text-right float-end my-2">
+                    <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden text-right float-end my-2">
 
-                    <Muestras titulo={titulo2} subtitulo={subtitulo2} texto={texto2} />
-                    <div className="w-2/5 shrink-0">
-                        <img
-                            src="https://www.lowcostparking.es/blog/wp-content/uploads/2018/03/pruebas-de-seguridad-en-los-aviones-730x410.jpg"
-                            alt="card-image"
-                            className="h-full w-full object-cover"
-                        />
+                        <Muestras titulo={titulo2} subtitulo={subtitulo2} texto={texto2} />
+                        <div className="w-2/5 shrink-0">
+                            <img
+                                src="https://www.lowcostparking.es/blog/wp-content/uploads/2018/03/pruebas-de-seguridad-en-los-aviones-730x410.jpg"
+                                alt="card-image"
+                                className="h-full w-full object-cover"
+                            />
+                        </div>
                     </div>
                 </div>
-
 
             </>} />
 

@@ -6,8 +6,7 @@ import Cuerpo from './components/cuerpo/cuerpo'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './index.css'
 import './App.css'
-
-
+import ComponenteFooter from './components/componenteFooter';
 function App() {
   const [usuarios, setUsuarios] = useState(null)
   const [viajes, setViajes] = useState(null)
@@ -52,8 +51,11 @@ function App() {
             setUsuarios={setUsuarios}
           />
         </div>
-
+        <div className='mt-96'>
+          <ComponenteFooter />
+        </div>
       </Router>
+
     </>)
   }
 

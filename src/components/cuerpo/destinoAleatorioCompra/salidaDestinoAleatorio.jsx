@@ -10,7 +10,7 @@ function SalidaDestinoAleatorio(props) {
 
         <>
             <label className="text-lg font-medium text-gray-700">
-                Salida: <select ref={props.salidaRef} className="p-2 border rounded-md">
+                Salida:  <select ref={props.salidaRef} className="p-2 border rounded-md">
                     {
                         valor.map((element) =>
                             element.salida.map((elementSalida) => (
@@ -21,7 +21,7 @@ function SalidaDestinoAleatorio(props) {
                 </select>
             </label>
             <label className="text-lg font-medium text-gray-700">
-                Hora: <select ref={props.horaRef} className="p-2 border rounded-md">
+                Hora:  <select ref={props.horaRef} className="p-2 border rounded-md">
                     {
                         valor.map((element) =>
                             element.horariosDeVuelo.map((elementHorariosDeVuelo) => (
@@ -32,7 +32,7 @@ function SalidaDestinoAleatorio(props) {
                 </select>
             </label>
             <label className="text-lg font-medium text-gray-700" >
-                Hora: <select ref={props.diaRef} className="p-2 border rounded-md">
+                Hora:  <select ref={props.diaRef} className="p-2 border rounded-md">
                     {
                         valor.map((element) =>
                             element.diasDeLaSemana.map((elementDiasDeLaSemana) => (

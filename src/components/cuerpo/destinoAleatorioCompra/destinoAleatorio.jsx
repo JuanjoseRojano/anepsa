@@ -73,7 +73,7 @@ function DestinoAleatorio(props) {
 
     return (
         <>
-            <div className="bg-[rgba(169,169,169,0.3)] grid grid-cols-2 gap-4 md:flex md:flex-wrap md:justify-center md:items-center md:space-x-5 md:p-4 border-solid border-amber-700 border-1 rounded-xl ">
+            <div className="bg-[rgba(169,169,169,0.3)] grid grid-cols-2 mx-28 gap-4 md:flex md:flex-wrap md:justify-center md:items-center md:space-x-5 md:p-4 border-solid border-amber-700 border-1 rounded-xl ">
                 <div>
                     <img src={lupa} alt="Lupa" className="w-12 h-12" />
                 </div>

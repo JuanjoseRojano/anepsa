@@ -3,7 +3,7 @@ import { useState } from 'react'
 function Muestras(props) {
     return (<>
 
-        <div className="p-4 w-3/5">
+        <div className="p-4 w-3/5 mx-10">
             <h6 className="text-gray-500 mb-4 uppercase font-semibold text-sm">
                 {props.titulo}
             </h6>
