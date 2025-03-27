@@ -1,0 +1,283 @@
+Este json es el utilizado para guardar información de los viajes dentro de jsonBIN, el ID del BIN se encuentra dentro del código en la carpeta de funcionalidades
+[
+  {
+    "destino": "París",
+    "imagen": "data:image/jpeg;base64,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",
+    "salida": [
+      "Sevilla",
+      "Granada",
+      "Bilbao"
+    ],
+    "horariosDeVuelo": [
+      "7:45",
+      "12:15",
+      "19:30"
+    ],
+    "diasDeLaSemana": [
+      "Lunes",
+      "Jueves",
+      "Sábado"
+    ],
+    "precio": "110€"
+  },
+  {
+    "destino": "Berlín",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg/800px-Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg",
+    "salida": [
+      "Santander",
+      "Oviedo",
+      "León"
+    ],
+    "horariosDeVuelo": [
+      "6:30",
+      "15:50",
+      "22:10"
+    ],
+    "diasDeLaSemana": [
+      "Martes",
+      "Viernes",
+      "Domingo"
+    ],
+    "precio": "130€"
+  },
+  {
+    "destino": "Lisboa",
+    "imagen": "https://cdn.nattivus.com/img/actividades/circuitos/lisboa/1547_portugal_turistico/circuito-portugal-turistico-y-lisboa.jpg",
+    "salida": [
+      "Cádiz",
+      "Vigo",
+      "Pamplona"
+    ],
+    "horariosDeVuelo": [
+      "8:00",
+      "14:45",
+      "20:50"
+    ],
+    "diasDeLaSemana": [
+      "Miércoles",
+      "Viernes",
+      "Domingo"
+    ],
+    "precio": "75€"
+  },
+  {
+    "destino": "Ámsterdam",
+    "imagen": "https://cdn-images.welcometothejungle.com/Fl88V8bG5oMNutOwPco_mIGV3t4iwSi6PgTqz4-_Mn4/rs:auto:1500::/q:85/czM6Ly93dHRqLXByb2R1Y3Rpb24vdXBsb2Fkcy9hcnRpY2xlL2ltYWdlLzY0MDYvMTU1MzI3L0Ftc3RlcmRhbS0yLmpwZw",
+    "salida": [
+      "Murcia",
+      "Badajoz",
+      "San Sebastián"
+    ],
+    "horariosDeVuelo": [
+      "9:20",
+      "13:10",
+      "18:40"
+    ],
+    "diasDeLaSemana": [
+      "Lunes",
+      "Jueves",
+      "Sábado"
+    ],
+    "precio": "140€"
+  },
+  {
+    "destino": "Dublín",
+    "imagen": "https://images.ecestaticos.com/RcCIF2yea9-VNeascDEfojeKMzE=/0x0:2121x1414/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F02f%2Fde4%2F0ab%2F02fde40abf5b6f32314460e28954c1b8.jpg",
+    "salida": [
+      "Zamora",
+      "Córdoba",
+      "Girona"
+    ],
+    "horariosDeVuelo": [
+      "7:15",
+      "16:30",
+      "23:00"
+    ],
+    "diasDeLaSemana": [
+      "Martes",
+      "Viernes",
+      "Domingo"
+    ],
+    "precio": "125€"
+  },
+  {
+    "destino": "Atenas",
+    "imagen": "https://mihistoriauniversal.com/wp-content/uploads/atenas-partenon-antigua-grecia.jpg",
+    "salida": [
+      "Jaén",
+      "Castellón",
+      "Segovia"
+    ],
+    "horariosDeVuelo": [
+      "5:50",
+      "11:25",
+      "17:45"
+    ],
+    "diasDeLaSemana": [
+      "Miércoles",
+      "Sábado",
+      "Domingo"
+    ],
+    "precio": "135€"
+  },
+  {
+    "destino": "Bruselas",
+    "imagen": "https://www.viajarabelgica.com/img/que-visitar-bruselas-belgica.jpg",
+    "salida": [
+      "Cuenca",
+      "Tarragona",
+      "Gijón"
+    ],
+    "horariosDeVuelo": [
+      "6:40",
+      "13:35",
+      "21:15"
+    ],
+    "diasDeLaSemana": [
+      "Lunes",
+      "Jueves",
+      "Sábado"
+    ],
+    "precio": "115€"
+  },
+  {
+    "destino": "Estocolmo",
+    "imagen": "https://res.cloudinary.com/dtljonz0f/image/upload/c_auto,ar_4:3,w_3840,g_auto/f_auto/q_auto/v1/gc-v1/stockholm/Stockholm_skyline_1896884044_Large_ss_non-editorial_q6nghv?_a=BAVARSAP0",
+    "salida": [
+      "Valladolid",
+      "A Coruña",
+      "Huesca"
+    ],
+    "horariosDeVuelo": [
+      "7:10",
+      "14:20",
+      "19:55"
+    ],
+    "diasDeLaSemana": [
+      "Martes",
+      "Viernes",
+      "Domingo"
+    ],
+    "precio": "145€"
+  },
+  {
+    "destino": "Moscú",
+    "imagen": "https://www.iberia.com/wcs/imagenes/guias/MOSCU/MOSCU.JPG",
+    "salida": [
+      "Almería",
+      "Soria",
+      "Lugo"
+    ],
+    "horariosDeVuelo": [
+      "5:30",
+      "12:40",
+      "22:05"
+    ],
+    "diasDeLaSemana": [
+      "Lunes",
+      "Miércoles",
+      "Sábado"
+    ],
+    "precio": "160€"
+  },
+  {
+    "destino": "Oslo",
+    "imagen": "https://fotografias.larazon.es/clipping/cmsimages01/2023/08/01/D09289B4-6881-4AEE-AEFA-0CFFBFDE7D0E/vista-panoramica-aerea-opera-oslo-nuevo-barrio-negocios-oslo-noruega_98.jpg?crop=5464,3074,x0,y287&width=1900&height=1069&optimize=low&format=webply",
+    "salida": [
+      "Teruel",
+      "Ourense",
+      "Logroño"
+    ],
+    "horariosDeVuelo": [
+      "8:20",
+      "15:10",
+      "20:30"
+    ],
+    "diasDeLaSemana": [
+      "Miércoles",
+      "Viernes",
+      "Domingo"
+    ],
+    "precio": "150€"
+  },
+  {
+    "destino": "Madrid",
+    "imagen": "https://media.gettyimages.com/id/951917136/es/foto/vista-aérea-y-skyline-de-madrid-al-atardecer-españa-europa.jpg?s=612x612&w=gi&k=20&c=6zIox0nRiKN1B0bgyUeF3vwUXhtyO0A5eX0DIIV8UD8=",
+    "salida": [
+      "Málaga",
+      "Alicante",
+      "Huelva"
+    ],
+    "horariosDeVuelo": [
+      "15:25",
+      "20:30",
+      "3:40"
+    ],
+    "diasDeLaSemana": [
+      "Lunes",
+      "Miércoles",
+      "Viernes"
+    ],
+    "precio": "89€"
+  },
+  {
+    "destino": "Barcelona",
+    "imagen": "https://media.istockphoto.com/id/1301579230/es/foto/spanish-cities-la-sagrada-familia-barcelona.jpg?s=612x612&w=0&k=20&c=gHeFQpwMkDCYaoP_h88hVTmz54QMk89kkLf9PSaDj3I=",
+    "salida": [
+      "A Coruña",
+      "Valladolid",
+      "Salamanca"
+    ],
+    "horariosDeVuelo": [
+      "10:00",
+      "13:30",
+      "22:15"
+    ],
+    "diasDeLaSemana": [
+      "Martes",
+      "Jueves",
+      "Sábado"
+    ],
+    "precio": "105€"
+  },
+  {
+    "destino": "Londres",
+    "imagen": "https://www.iese.edu/es/insight/wp-content/uploads/sites/4/2022/11/Londres-Cities-in-motion-1024-alto.jpg",
+    "salida": [
+      "Lérida",
+      "Zaragoza",
+      "Albacete"
+    ],
+    "horariosDeVuelo": [
+      "8:30",
+      "14:00",
+      "18:45"
+    ],
+    "diasDeLaSemana": [
+      "Lunes",
+      "Viernes",
+      "Domingo"
+    ],
+    "precio": "120€"
+  },
+  {
+    "destino": "Roma",
+    "imagen": "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1640835927/o3pfl41q7m5bj8jardk0.jpg",
+    "salida": [
+      "Ceuta",
+      "Toledo",
+      "Burgos"
+    ],
+    "horariosDeVuelo": [
+      "9:00",
+      "16:20",
+      "21:05"
+    ],
+    "diasDeLaSemana": [
+      "Miércoles",
+      "Sábado",
+      "Domingo"
+    ],
+    "precio": "95€"
+  }
+]
