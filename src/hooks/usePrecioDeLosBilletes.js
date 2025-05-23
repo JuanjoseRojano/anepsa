@@ -7,9 +7,8 @@ const usePrecioDeLosBilletes = (valorInicial = 0) => {
 
     const añadirIVA = (numeroDeBilletes, precio) => {
         if (numeroDeBilletes != 0) {
-            const precioNumerico = parseFloat(precio.replace(/[^0-9.-]+/g, ""))
 
-            setPrecioDeLosBilletes(Math.round((numeroDeBilletes * precioNumerico) * 1.21))
+            setPrecioDeLosBilletes(Math.round((numeroDeBilletes * precio) * 1.21))
 
         }
         else {

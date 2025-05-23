@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Cargando() {
+function Cargando(props) {
     return (
         <div className="flex flex-col justify-center items-center h-screen space-y-4">
             <div className="flex space-x-3">
@@ -9,11 +9,11 @@ function Cargando() {
                 <div className="w-6 h-6 bg-red-500 rounded-full animate-bounce"></div>
             </div>
             <h1 className="text-xl font-semibold text-gray-700">
-                Cargando base de datos...
+                {props.textoCargando}
             </h1>
         </div>
     )
-
+    // Cargando base de datos...
 
 
 }

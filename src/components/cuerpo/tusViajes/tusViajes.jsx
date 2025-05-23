@@ -1,10 +1,72 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import TarjetasMisViajes from './tarjetasMisViajes';
+import { isBefore } from 'date-fns';
+
 function TusViajes(props) {
 
+
+    const separarTarjetas = (element) => {
+
+        console.log(element)
+
+        const fechaDeVueloTransformada = new Date(element.fechaDeVuelo)
+
+        const fechaActualSumar2 = new Date()
+        const fechaLimite = new Date()
+
+
+        const fechaActualMas2 = new Date(fechaActualSumar2.setDate(fechaActualSumar2.getDate() + 2))
+        const fechaActualLimite = new Date(fechaLimite.setDate(fechaLimite.getDate() - 1))
+
+
+        let renderizarBilleteEditableONoEditable
+
+        if (isBefore(fechaDeVueloTransformada, fechaActualLimite)) {
+            renderizarBilleteEditableONoEditable = 2
+
+        } else if (isBefore(fechaDeVueloTransformada, fechaActualMas2)) {
+            renderizarBilleteEditableONoEditable = 1
+
+        }
+        else {
+            renderizarBilleteEditableONoEditable = 0
+
+        }
+
+
+
+        switch (renderizarBilleteEditableONoEditable) {
+
+            case 0: console.log("Si cambia")
+                return (<TarjetasMisViajes
+                    element={element}
+                    usuarioConectado={props.usuarioConectado}
+                    setUsuarioConectado={props.setUsuarioConectado}
+                    usuarios={props.suarios}
+                    setUsuarios={props.setUsuarios}
+                />)
+                break
+            case 1: console.log("No cambia")
+                return (<TarjetasMisViajes
+                    element={element}
+                    usuarioConectado={props.usuarioConectado}
+                    setUsuarioConectado={props.setUsuarioConectado}
+                    usuarios={props.suarios}
+                    setUsuarios={props.setUsuarios}
+                />)
+                break
+            case 2: console.log("Eliminar")
+                break
+        }
+
+
+
+    }
+
+
     if (props.usuarioConectado === null) {
-        return (<Navigate to='../LogIn'></Navigate>)
+        return (<Navigate to='../Sesion'></Navigate>)
     }
     else if (props.usuarioConectado.viajes.length === 0) {
 
@@ -27,20 +89,14 @@ function TusViajes(props) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4  justify-center p-3">
                     {
                         props.usuarioConectado.viajes.map((element) => (
-                            <TarjetasMisViajes
-                                imagen={element.imagen}
-                                destino={element.destino}
-                                salida={element.salida}
-                                horariosDeVuelo={element.horariosDeVuelo}
-                                diasDeLaSemana={element.diasDeLaSemana}
-                                numeroBilletes={element.numeroBilletes}
-                                precioOriginal={element.precio}
-                                precioTotal={element.precioTotal}
-                                usuarioConectado={props.usuarioConectado}
-                                setUsuarioConectado={props.setUsuarioConectado}
-                                usuarios={props.suarios}
-                                setUsuarios={props.setUsuarios}
-                            />
+                            separarTarjetas(element)
+                            // <TarjetasMisViajes
+                            //     element={element}
+                            //     usuarioConectado={props.usuarioConectado}
+                            //     setUsuarioConectado={props.setUsuarioConectado}
+                            //     usuarios={props.suarios}
+                            //     setUsuarios={props.setUsuarios}
+                            // />
                         ))
                     }
                 </div>

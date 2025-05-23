@@ -6,37 +6,40 @@ import viaje from "../../media/viaje.png"
 import ticket from "../../media/ticket.png"
 import staff from "../../media/staff.png"
 import logo from "../../media/logo.png"
+import '../../App.css'
+
 
 export default function NavPrincipal(props) {
-    const [logInOLogOut, setLogInOLogOut] = useState(null)
+    const [loginMostrarUser, setLoginMostrarUser] = useState(null)
     const [menuOpen, setMenuOpen] = useState(false)
-    const navigate = useNavigate()
 
-    function cerrarSesion(e) {
-        e.preventDefault()
-        props.setUsuarioConectado(null)
-        navigate("/inicio")
-    }
 
     useEffect(() => {
+
         if (props.usuarioConectado === null) {
-            setLogInOLogOut(
-                <Link to="/LogIn" onClick={() => setMenuOpen(false)}>
+            setLoginMostrarUser(
+                <Link to="/Sesion" onClick={() => setMenuOpen(false)}>
                     <SeccionNav imagenNav={login} nombreSeccionNav="Login" />
                 </Link>
-            );
+            )
         } else {
-            setLogInOLogOut(
-                <Link to="/Inicio" onClick={(e) => { cerrarSesion(e); setMenuOpen(false) }}>
-                    <SeccionNav imagenNav={login} nombreSeccionNav="LogOut" />
+
+            setLoginMostrarUser(
+
+                <Link to="/Sesion" onClick={() => { setMenuOpen(false) }}>
+                    <SeccionNav imagenNav={props.contenidoTokenUser.payload.picture} nombreSeccionNav={props.contenidoTokenUser.payload.name} />
                 </Link>
             )
+
+
         }
     }, [props.usuarioConectado])
 
+
+
     return (
-        <nav className="bg-gray-800 bg-opacity-80 shadow-lg sticky top-0 z-50 min-h-[64px] relative">
-            <div className="container mx-auto px-4 py-4 flex items-center justify-between w-full">
+        <nav className={`bg-gray-800 bg-opacity-80 shadow-lg sticky top-0 z-51 min-h-[64px] relative`}>
+            <div className="container mx-auto px-4 py-4 flex items-center justify-between w-full ">
                 <div className="flex items-center justify-between w-full">
 
                     <Link to="/inicio" className="flex items-center space-x-3">
@@ -45,28 +48,39 @@ export default function NavPrincipal(props) {
                     </Link>
 
                     <button
-                        className="text-white text-3xl md:hidden focus:outline-none"
+                        className="burger w-7 sm:w-10 md:w-10 h-8 flex flex-col justify-between items-center bg-transparent border-none cursor-pointer hover:animate-move-right "
                         onClick={() => setMenuOpen(!menuOpen)}
                     >
-                        {menuOpen ? "✖" : "☰"}
+                        <span
+                            className={`block h-1 w-full bg-blue-900 rounded-full transition-all duration-300 ease-in-out transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+                        ></span>
+                        <span
+                            className={`block h-1 w-full bg-blue-900 rounded-full transition-all duration-300 ease-in-out ${menuOpen ? "opacity-0" : ""}`}
+                        ></span>
+                        <span
+                            className={`block h-1 w-full bg-blue-900 rounded-full transition-all duration-300 ease-in-out transform ${menuOpen ? "-rotate-45 translate-y-2" : ""}`}
+                        ></span>
                     </button>
                 </div>
+            </div>
 
-                <div className={`absolute md:relative top-full left-0 w-full md:w-auto bg-gray-900 md:bg-transparent p-4 md:p-0 transition-all duration-300 ease-in-out ${menuOpen ? "block" : "hidden"} md:flex md:items-center md:space-x-6`}>
-                    <div className="flex flex-col md:flex-row md:items-center space-y-4 space-x-6 md:space-y-0 md:space-x-6">
-                        {logInOLogOut}
-                        <Link to="/TusViajes" className="block md:inline-block " onClick={() => setMenuOpen(false)}>
-                            <SeccionNav imagenNav={viaje} nombreSeccionNav="Tus viajes" />
-                        </Link>
-                        <Link to="/ReservarViajes" className="block md:inline-block" onClick={() => setMenuOpen(false)}>
-                            <SeccionNav imagenNav={ticket} nombreSeccionNav="Reservar viajes" />
-                        </Link>
-                        <Link to="/ViajesComunes" className="block md:inline-block" onClick={() => setMenuOpen(false)}>
-                            <SeccionNav imagenNav={staff} nombreSeccionNav="Viajes más frecuentes" />
-                        </Link>
-                    </div>
+
+            <div className={`container mx-auto px-4 py-4 flex items-center justify-between w-full ${menuOpen ? "mostrarMenu" : "hidden"} `} >
+                <div className="flex flex-col items-start justify-between w-full ">
+
+                    {loginMostrarUser}
+                    <Link to="/TusViajes" className="  " onClick={() => setMenuOpen(false)}>
+                        <SeccionNav imagenNav={viaje} nombreSeccionNav="Tus viajes" />
+                    </Link>
+                    <Link to="/ReservarViajes" className="" onClick={() => setMenuOpen(false)}>
+                        <SeccionNav imagenNav={ticket} nombreSeccionNav="Reservar viajes" />
+                    </Link>
+                    <Link to="/ViajesComunes" className="" onClick={() => setMenuOpen(false)}>
+                        <SeccionNav imagenNav={staff} nombreSeccionNav="Viajes más frecuentes" />
+                    </Link>
                 </div>
             </div>
-        </nav>
+
+        </nav >
     )
 }

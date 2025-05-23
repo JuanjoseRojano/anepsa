@@ -3,6 +3,7 @@ import { comprarBilletes } from '../../../funcionalidades/obtenerAPI';
 import SelectViajes from '../../selectViajes';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Boton from '../../Boton'
+import DatepickerCalendario from './datePickerCalendario'
 
 import useManejoBilletes from '../../../hooks/useManejoBilletes'
 import usePrecioDeLosBilletes from '../../../hooks/usePrecioDeLosBilletes'
@@ -54,7 +55,7 @@ function FormularioDeReserva(props) {
 
     return <>
 
-        <div className="bg-white p-6 rounded-xl border-2 border-gray-300 shadow-lg max-w-md w-full text-center m-4">
+        <div className="bg-white p-6 rounded-xl border-2 border-gray-300 shadow-lg max-w-md w-full text-center m-4 z-20">
             <form onSubmit={realizarCompra} className="flex flex-col gap-4">
                 <h1 className={classNameError}>{errorDeFormulario}</h1>
                 <h1 ref={nombreDestino} className="text-2xl font-semibold text-gray-800">{props.element.destino}</h1>
@@ -64,6 +65,7 @@ function FormularioDeReserva(props) {
                     ref={imagenDestino}
                     className="w-full h-48 object-cover rounded-lg shadow-lg"
                 />
+                <DatepickerCalendario></DatepickerCalendario>
                 <div className='grid grid-cols-1 md:grid-cols-2'>
                     <div className="flex flex-col gap-4 m-3">
 
@@ -73,10 +75,6 @@ function FormularioDeReserva(props) {
 
                         <select required ref={horaDeSalida} className="p-2 border border-gray-300 rounded-md text-lg">
                             <SelectViajes opciones={props.element.horariosDeVuelo} />
-                        </select>
-
-                        <select required ref={diaSemana} className="p-2 border border-gray-300 rounded-md text-lg">
-                            <SelectViajes opciones={props.element.diasDeLaSemana} />
                         </select>
 
                     </div>
@@ -109,6 +107,7 @@ function FormularioDeReserva(props) {
                     Comprar
                 </button>
             </form>
+
         </div >    </>
 
 
