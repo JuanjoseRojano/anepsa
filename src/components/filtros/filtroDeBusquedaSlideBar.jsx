@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider'
-import { cambiarBillete, filtrosDeBusqueda } from '../../funcionalidades/obtenerAPI'
+import { filtrosDeBusqueda } from '../../funcionalidades/obtenerAPI'
 import Boton from '../Boton'
 
 function FiltroDeBusquedaSlideBar(props) {

@@ -3,7 +3,6 @@ import useManejoBilletes from '../../../hooks/useManejoBilletes'
 import usePrecioDeLosBilletes from '../../../hooks/usePrecioDeLosBilletes'
 import SelectViajes from '../../selectViajes'
 import Boton from '../../Boton'
-import { eliminarBillete, cambiarBillete } from '../../../funcionalidades/obtenerAPI'
 import DatePickerCalendario from '../reservarVuelos/datePickerCalendario'
 import Checkbox from '@mui/material/Checkbox'
 import Cargando from '../../cargando'
@@ -14,9 +13,7 @@ import { getMongoDB, putMongoDB, deleteMongoDB } from '../../../funcionalidades/
 function TarjetasMisViajesEditable(props) {
 
     let vueloDelViaje = props.viajes.find((viaje) => (viaje.destino === props.element.destino))
-    // if (!vueloDelViaje) {
-    //     return <div className="text-red-500">Error: No se encontró el vuelo correspondiente a este viaje.</div>;
-    // }
+
 
     const diseñoBotonesPequeños = "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2"
 
@@ -71,6 +68,44 @@ function TarjetasMisViajesEditable(props) {
             fechaDeViajeDeUsuarioPrevios.getDate() === fechaDelVuelo.getDate())
     }
 
+    async function eliminarBillete() {
+        setMostrarCargandoDatos(
+            <div className="fixed inset-0   flex items-center justify-center z-50">
+
+                <Cargando
+                    textoCargando={"Actualizando base de datos"} />
+            </div>)
+
+        const usuariosActuales = await getMongoDB("/Usuarios");
+        const viajesActuales = await getMongoDB("/Viajes");
+
+        const usuarioEncontrado = usuariosActuales.find(usuario =>
+            usuario._id === props.usuarioConectado._id
+        )
+        const viajeEncontrado = viajesActuales.find(viaje =>
+            viaje.destino === props.element.destino
+        )
+
+        if (viajeEncontrado) {
+            await deleteMongoDB(`/Usuarios/${usuarioEncontrado._id}/viajes/${props.element._id}`)
+
+            props.setUsuarios(await getMongoDB("/Usuarios"))
+
+            props.setViajes(await getMongoDB("/Viajes"))
+
+            const usuarioConectadoTrasComprar = await getMongoDB("/Usuarios")
+            props.setUsuarioConectado(usuarioConectadoTrasComprar.find(usuario =>
+                usuario._id === props.usuarioConectado._id
+            ))
+        }
+
+        const timer = setTimeout(() => {
+            setMostrarCargandoDatos(null)
+        }, 2000)
+        //limpiar timeout por si acaso
+        return () => clearTimeout(timer)
+    }
+
 
     async function comprobacionDeActualizacion() {
         setMostrarCargandoDatos(
@@ -89,11 +124,6 @@ function TarjetasMisViajesEditable(props) {
         const viajeEncontrado = viajesActuales.find(viaje =>
             viaje.destino === props.element.destino
         )
-
-
-        // const usuarioViajeEncontrado = usuarioEncontrado.find(viaje =>
-        //     viaje._id === props.element._id
-        // )
 
         if (manejoBilletes === 0) {
             props.setError("Falta añadir billetes ")
