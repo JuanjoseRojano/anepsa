@@ -4,7 +4,7 @@ import SeccionNav from "./seccionNav"
 import login from "../../media/login.png"
 import viaje from "../../media/viaje.png"
 import ticket from "../../media/ticket.png"
-import staff from "../../media/staff.png"
+// import staff from "../../media/staff.png"
 import logo from "../../media/logo.png"
 import '../../App.css'
 
@@ -74,9 +74,6 @@ export default function NavPrincipal(props) {
                     </Link>
                     <Link to="/ReservarViajes" className="" onClick={() => setMenuOpen(false)}>
                         <SeccionNav imagenNav={ticket} nombreSeccionNav="Reservar viajes" />
-                    </Link>
-                    <Link to="/ViajesComunes" className="" onClick={() => setMenuOpen(false)}>
-                        <SeccionNav imagenNav={staff} nombreSeccionNav="Viajes más frecuentes" />
                     </Link>
                 </div>
             </div>

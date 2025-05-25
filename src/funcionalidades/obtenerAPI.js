@@ -286,13 +286,16 @@ export function filtrosDeBusqueda(
         .filter(viaje => parseInt(viaje.precio, 10) >= parseInt(tipoDeFiltro.min, 10))
         .filter(viaje => parseInt(viaje.precio, 10) <= parseInt(tipoDeFiltro.max, 10))
 
-    if (tipoDeFiltro.numeroDeAsientosAvion != "") {
+    const filtroAsientos = parseInt(tipoDeFiltro.numeroDeAsientosRestantes, 10)
 
-        coincidenciasDeLosFiltrosAplicados = coincidenciasDeLosFiltrosAplicados.filter(viaje => parseInt(viaje.numeroDeAsientosRestantes, 10) >= parseInt(tipoDeFiltro.numeroDeAsientosAvion, 10))
-
-
-
+    if (!isNaN(filtroAsientos)) {
+        coincidenciasDeLosFiltrosAplicados = coincidenciasDeLosFiltrosAplicados.filter(viaje => {
+            //El problema esque al tratar de filtrar por un numero, puedo no devolver nada y no dejar pasar al array y viceversa
+            //ademas el valor vacio ocasiona errores por lo tanto devuelvo true o false antes de filtrar
+            return !isNaN(parseInt(viaje.numeroDeAsientosAvion, 10)) && parseInt(viaje.numeroDeAsientosAvion, 10) >= filtroAsientos
+        })
     }
+
 
     if (coincidenciasDeLosFiltrosAplicados.length > 0) {
 
@@ -318,6 +321,7 @@ export function filtrosDeBusqueda(
 
         setListaFiltrada([...new Set(listadoSinArrays)])
         setOpcionesDeVuelo(coincidenciasDeLosFiltrosAplicados)
+        setAntiaSincronia(prev => prev + 1)
 
     }
     else {

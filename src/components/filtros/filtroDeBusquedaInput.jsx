@@ -69,7 +69,7 @@ function FiltroDeBusquedaInput(props) {
         //NOTA IMPORTANTE tipo de filtro cambia pero react no detecta si 
         // cambia UNA SOLA COSA por ende, si no apuntamos a un objeto en concreto
         //esta funcion se dispara cuando no debe
-    }, [props.tipoDeFiltro[props.datoAFiltrar]])
+    }, [props.tipoDeFiltro])
 
     return (
         <div className='ml-7 mr-7' >

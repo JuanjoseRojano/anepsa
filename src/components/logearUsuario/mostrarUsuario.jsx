@@ -74,19 +74,19 @@ function MostrarUsuario(props) {
 
                     return (<>
 
-                        <div className='m-1.5 my-4 gap-7'>
+                        <div className='m-1.5 my-7 gap-7'>
                             <h1 className="font-bold text-2xl my-3 relative text-center py-2 before:absolute before:bottom-0 before:left-0 before:right-0 before:h-[10px] before:bg-gradient-to-t before:from-transparent before:to-blue-500 before:rounded-b-full"> {element.destino}</h1>
                             <img src={element.imagen} alt={element.destino} className="w-full max-h-70 object-cover rounded-md mb-4" />
                             <div className=''>
-                                <div className="flex items-center space-x-2 mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
+                                <div className="flex flex-col md:flex-row  items-center space-x-2 space-y-2   mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
                                     <span className={estilosSpan}>Salida: {element.salida}</span>
                                     <span className={estilosSpan}>Hora de llegada: {element.horarioDeVuelo}</span>
                                     <span className={estilosSpan}>Dia viaje: {diaDelVuelo}</span>
                                 </div>
 
-                                <div className="flex items-center space-x-2 mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
+                                <div className="flex flex-col md:flex-row items-center space-x-2 space-y-2 mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
                                     <span className={estilosSpan}>Número de billetes: {element.numeroDeBilletes}</span>
-                                    <span className={estilosSpan}>Precio: {element.precioDelVueloFinal}</span>
+                                    <span className={estilosSpan}>Precio: {element.precioDelVueloFinal} €</span>
                                     <span className={estilosSpan}>{idaYVuelta}</span>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ function MostrarUsuario(props) {
         }
     }, [])
 
-    const estilosSpan = "ml-2 text-gray-700 font-medium bg-blue-100 border-l-4 border-blue-500 px-2 py-1 rounded-lg"
+    const estilosSpan = "ml-2 my-4 text-gray-700 font-medium bg-blue-100 border-l-4 border-blue-500 px-2 py-1 rounded-lg"
 
     return (<>
         {/* <div className='p-2 md:flex gap-16 m-10'> */}

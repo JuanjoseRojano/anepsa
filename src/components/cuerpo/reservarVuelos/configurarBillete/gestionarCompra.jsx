@@ -1,16 +1,19 @@
 import { useState, useRef, useEffect } from 'react'
 import { postMongoDB, getMongoDB, putMongoDB } from '../../../../funcionalidades/obtenerAPI';
-import SelectViajes from '../../../selectViajes';
+import SelectViajes from '../../../selectViajes'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Boton from '../../../Boton'
 import DatepickerCalendario from '../datePickerCalendario'
-import Cargando from '../../../cargando';
+import Cargando from '../../../cargando'
 
 import useManejoBilletes from '../../../../hooks/useManejoBilletes'
 import usePrecioDeLosBilletes from '../../../../hooks/usePrecioDeLosBilletes'
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from '@mui/material/Checkbox'
 
 import fondoFormulario from "../../../../media/fondoFormulario.jpg"
+import paypal from "../../../../media/paypal.png"
+import visa from "../../../../media/visa.png"
+import imagine from "../../../../media/imagine.png"
 
 function GestionarCompra(props) {
 
@@ -34,7 +37,9 @@ function GestionarCompra(props) {
         const imagenDestino = useRef(null)
         const horaDeSalida = useRef(null)
 
-        const [checked, setChecked] = useState(false);
+        const [checked, setChecked] = useState(false)
+        const [checkedMetodoDePago, setCheckedMetodoDePago] = useState([false, false, false])
+
 
         const precioDeBilleteFinal = useRef(null)
 
@@ -60,9 +65,9 @@ function GestionarCompra(props) {
         fechaMaximaDelVuelo.setDate(fechaMaximaDelVuelo.getDate() + 12)
         fechaMaximaDelVuelo.setMonth(fechaMaximaDelVuelo.getMonth() + 3)
 
-        fechaMinimaDelVuelo.setDate(fechaMinimaDelVuelo.getDate() + 2)
+        fechaMinimaDelVuelo.setDate(fechaMinimaDelVuelo.getDate() + 3)
 
-        fechaInicialDelVuelo.setDate(fechaInicialDelVuelo.getDate() + 2)
+        fechaInicialDelVuelo.setDate(fechaInicialDelVuelo.getDate() + 3)
 
 
         //Fechas para controlar edad
@@ -110,6 +115,11 @@ function GestionarCompra(props) {
 
         async function comprobacionDeEnvioFormularioDeCompra() {
 
+            setMostrarCargandoDatos(<div className="sticky inset-0 bg-grey bg-opacity-50 flex items-center justify-center z-[40]">
+                <Cargando
+                    textoCargando={"Actualizando base de datos"} />
+            </div>)
+
             let enviarFormulario = true
 
             const usuariosActuales = await getMongoDB("/Usuarios");
@@ -131,6 +141,11 @@ function GestionarCompra(props) {
             }
             else {
                 props.setError("DNI inválido")
+                enviarFormulario = false
+            }
+
+            if (checkedMetodoDePago[0] === false && checkedMetodoDePago[1] === false && checkedMetodoDePago[2] === false) {
+                props.setError("Falta el método de pago ")
                 enviarFormulario = false
             }
 
@@ -173,7 +188,7 @@ function GestionarCompra(props) {
                     horarioDeVuelo: horaDeSalida.current.value,
                     fechaDeVuelo: fechaDelVuelo.toISOString(),
                     precioDelVuelo: precioOriginal.current.textContent,
-                    precioDelVueloFinal: precioDeBilleteFinal.current.textContent,
+                    precioDelVueloFinal: precioDeLosBilletes,
                     numeroDeBilletes: manejoBilletes,
                     idaYVuelta: checked
                 }
@@ -190,17 +205,11 @@ function GestionarCompra(props) {
                     usuario._id === props.usuarioConectado._id
                 ))
 
-                setMostrarCargandoDatos(<div className="sticky inset-0 bg-grey bg-opacity-50 flex items-center justify-center z-[40]">
-                    <Cargando
-                        textoCargando={"Actualizando base de datos"} />
-                </div>)
-
-                const timer = setTimeout(() => {
-                    setMostrarCargandoDatos(null)
-                    salirDeCompra('../ReservarViajes')
-                }, 3000)
             }
-
+            const timer = setTimeout(() => {
+                setMostrarCargandoDatos(null)
+                salirDeCompra('../ReservarViajes')
+            }, 3000)
             //limpiar timeout por si acaso
             return () => clearTimeout(timer)
         }
@@ -212,6 +221,18 @@ function GestionarCompra(props) {
 
             }
             setChecked(event.target.checked)
+        }
+
+        const handleChangeMetodoDePago = (opcion) => {
+
+            switch (opcion) {
+                case 1: setCheckedMetodoDePago([true, false, false])
+                    break
+                case 2: setCheckedMetodoDePago([false, true, false])
+                    break
+                case 3: setCheckedMetodoDePago([false, false, true])
+                    break
+            }
         }
 
         useEffect(() => {
@@ -228,7 +249,7 @@ function GestionarCompra(props) {
                     className='m-7 relative'>
                     <div className="flex flex-col md:flex-row gap-6">
                         <div className="flex flex-col md:basis-2/3 gap-6">
-                            <div className="bg-amber-300 p-4 rounded-lg shadow-md">
+                            <div className="bg-blue-50 rounded-xl border border-blue-200  p-4  shadow-md">
                                 <h1 className="text-xl font-semibold mb-4">Datos del usuario</h1>
 
                                 <label className="block mb-2 font-medium">Nombre del responsable</label>
@@ -275,13 +296,56 @@ function GestionarCompra(props) {
                                     className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                 />
                             </div>
+                            <div className='bg-blue-50 rounded-xl border border-blue-200  shadow-md text-white  items-center p-4'>
+                                <h1 className="text-xl font-semibold mb-4 mask-y-from-4 text-black">Método de pago</h1>
 
-                            <div className="bg-amber-950 p-4 rounded-lg shadow-md text-white flex items-center justify-center">
-                                <h1 className="text-xl font-semibold">Método de pago (pendiente)</h1>
+                                <div className=" flex flex-col md:grid md:grid-cols-3 md:grid-rows-2 justify-center gap-7 p-5 ">
+
+                                    <div className='flex max-w-100 col-start-1 row-start-1'>
+                                        <div>
+                                            <img src={paypal} className='w-full h-full' />
+                                        </div>
+                                        <Checkbox
+                                            checked={checkedMetodoDePago[0]}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                handleChangeMetodoDePago(1)
+                                            }}
+                                            inputProps={{ "aria-label": "controlled" }}
+                                        />
+                                    </div>
+                                    <div className='flex max-w-100 col-start-3 row-start-1'>
+                                        <div>
+                                            <img src={imagine} className='w-full h-full' />
+                                        </div>
+                                        <Checkbox
+                                            checked={checkedMetodoDePago[1]}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                handleChangeMetodoDePago(2)
+                                            }}
+                                            inputProps={{ "aria-label": "controlled" }}
+                                        />
+                                    </div>
+                                    <div className='flex max-w-100 col-start-2 row-start-2'>
+                                        <div>
+                                            <img src={visa} className='w-full h-full' />
+                                        </div>
+                                        <Checkbox
+
+                                            checked={checkedMetodoDePago[2]}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                handleChangeMetodoDePago(3)
+                                            }}
+                                            inputProps={{ "aria-label": "controlled" }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="md:basis-1/3 bg-pink-200 p-6 rounded-xl border-2 border-gray-300 shadow-lg max-w-full text-center z-20">
+                        <div className="md:basis-1/3 bg-blue-50 rounded-xl border border-blue-200  p-6  shadow-lg max-w-full text-center z-20">
                             <h1 ref={nombreDestino} className="text-2xl font-semibold text-gray-800 mb-4">
                                 {props.vueloAComprar.destino}
                             </h1>
@@ -363,7 +427,7 @@ function GestionarCompra(props) {
                                             <p className="text-lg font-medium text-gray-700">Precio final:</p>
                                             <div className="flex items-center p-1 bg-gradient-to-r from-green-200 via-blue-200 to-purple-200 border-solid rounded-xl">
                                                 <h1 ref={precioDeBilleteFinal} className="text-lg font-medium text-gray-700">
-                                                    {precioDeLosBilletes}
+                                                    {precioDeLosBilletes * (checked ? 2 : 1) + "€"}
                                                 </h1>
                                                 <p className="ml-1">€</p>
                                             </div>

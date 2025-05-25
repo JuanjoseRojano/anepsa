@@ -7,6 +7,7 @@ function DatePickerCalendario(props) {
     useEffect(() => {
         props.setFecha(props.fechaInicial)
     }, [])
+
     return (
         <div className="w-full h-full p-4 bg-white rounded-lg shadow-md">
             <label className="block text-gray-700 text-sm font-semibold mb-2">

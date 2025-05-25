@@ -6,7 +6,6 @@ import ReservarViajes from './reservarVuelos/reservarViajes'
 import TusViajes from './tusViajes/tusViajes'
 import ViajesComunes from './viajesComunes/viajesComunes'
 import DestinoAleatorio from './destinoAleatorioCompra/destinoAleatorio'
-import GestionarCompra from './reservarVuelos/configurarBillete/gestionarCompra'
 import ErrorGeneral from '../error'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import MostrarUsuario from '../logearUsuario/mostrarUsuario'
@@ -22,7 +21,15 @@ function Cuerpo(props) {
     const subtitulo2 = "Los aviones más seguros y cómodos del mundo"
     const texto2 = "La seguridad de nuestros pasajeros es nuestra máxima prioridad. Nuestro equipo de pilotos altamente capacitados y el mantenimiento regular de nuestras aeronaves aseguran que su vuelo sea lo más seguro posible."
 
-    const [componenteUsuario, setComponenteUsuario] = useState(<Login usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} usuarios={props.usuarios} setUsuarios={props.setUsuarios} />)
+    const [componenteUsuario, setComponenteUsuario] = useState(<Login usuarioConectado={props.usuarioConectado}
+        setUsuarioConectado={props.setUsuarioConectado}
+        usuarios={props.usuarios}
+        setUsuarios={props.setUsuarios}
+        contenidoTokenUser={props.contenidoTokenUser}
+        setContenidoTokenUser={props.setContenidoTokenUser}
+        usuarioConectadoVuelos={props.usuarioConectadoVuelos}
+        setUsuarioConectadoVuelos={props.setUsuarioConectadoVuelos}
+        viajes={props.viajes} />)
     const [vueloAComprar, setVueloAComprar] = useState(null)
 
     const [error, setError] = useState("");
@@ -38,7 +45,8 @@ function Cuerpo(props) {
                 contenidoTokenUser={props.contenidoTokenUser}
                 setContenidoTokenUser={props.setContenidoTokenUser}
                 usuarioConectadoVuelos={props.usuarioConectadoVuelos}
-                setUsuarioConectadoVuelos={props.setUsuarioConectadoVuelos} />)
+                setUsuarioConectadoVuelos={props.setUsuarioConectadoVuelos}
+                viajes={props.viajes} />)
         }
         else {
             setComponenteUsuario(<MostrarUsuario usuarioConectado={props.usuarioConectado}
@@ -48,7 +56,8 @@ function Cuerpo(props) {
                 contenidoTokenUser={props.contenidoTokenUser}
                 setContenidoTokenUser={props.setContenidoTokenUser}
                 usuarioConectadoVuelos={props.usuarioConectadoVuelos}
-                setUsuarioConectadoVuelos={props.setUsuarioConectadoVuelos} />)
+                setUsuarioConectadoVuelos={props.setUsuarioConectadoVuelos}
+                viajes={props.viajes} />)
 
         }
 
@@ -67,7 +76,14 @@ function Cuerpo(props) {
                         <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white/100 to-transparent"></div>
 
                     </div>
-                    <DestinoAleatorio viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado}></DestinoAleatorio>
+                    <div className='flex flex-col md:flex-row my-4  bg-blue-200  '>
+                        <DestinoAleatorio viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado}></DestinoAleatorio>
+                        <div className='max-h-64 max-w-64 min-h-40 min-w-min-h-40 h-full w-full m-auto'>
+                            <ViajesComunes usuarios={props.usuarios} viajes={props.viajes} />
+                        </div>
+
+                    </div>
+
                     <div className='my-20'>
                         <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden">
                             <div className="w-2/5 shrink-0">
@@ -80,7 +96,6 @@ function Cuerpo(props) {
                             <Muestras titulo={titulo1} subtitulo={subtitulo1} texto={texto1} />
                         </div>
                         <div className="max-w-[48rem] w-full flex flex-row bg-white shadow-lg rounded-lg overflow-hidden text-right float-end my-2">
-
                             <Muestras titulo={titulo2} subtitulo={subtitulo2} texto={texto2} />
                             <div className="w-2/5 shrink-0">
                                 <img
@@ -92,16 +107,16 @@ function Cuerpo(props) {
                         </div>
                     </div>
 
+
+
                 </>} />
 
 
 
                 <Route path="/Sesion" element={componenteUsuario} setError={setError} />
-                <Route path='/TusViajes' element={<TusViajes usuarioConectado={props.usuarioConectado} viajes={props.viajes} setUsuarios={props.setUsuarios} setUsuarioConectado={props.setUsuarioConectado} />} />
+                <Route path='/TusViajes' element={<TusViajes viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} setUsuarioConectado={props.setUsuarioConectado} usuarioConectado={props.usuarioConectado} setError={setError} />} />
                 <Route path="/ReservarViajes" element={<ReservarViajes usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setVueloAComprar={setVueloAComprar} />} />
                 <Route path="/ViajesComunes" element={<ViajesComunes usuarios={props.usuarios} viajes={props.viajes} />} />
-                <Route path="/ReservarViajes/ComprarBillete" element={<GestionarCompra usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setViajes={props.setViajes} vueloAComprar={vueloAComprar} setVueloAComprar={setVueloAComprar} setError={setError} />} />
-
 
             </Routes>
         </SubirScroll>

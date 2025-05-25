@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import TarjetasMisViajes from './tarjetasMisViajes';
+// import TarjetasMisViajes from './tarjetasMisViajes';
+import TarjetasMisViajesEditable from './tarjetasMisViajesEditable';
+
 import { isBefore } from 'date-fns';
 
 function TusViajes(props) {
@@ -8,7 +10,6 @@ function TusViajes(props) {
 
     const separarTarjetas = (element) => {
 
-        console.log(element)
 
         const fechaDeVueloTransformada = new Date(element.fechaDeVuelo)
 
@@ -38,25 +39,28 @@ function TusViajes(props) {
 
         switch (renderizarBilleteEditableONoEditable) {
 
-            case 0: console.log("Si cambia")
-                return (<TarjetasMisViajes
+            case 0:
+                return (<TarjetasMisViajesEditable
                     element={element}
                     usuarioConectado={props.usuarioConectado}
                     setUsuarioConectado={props.setUsuarioConectado}
                     usuarios={props.suarios}
                     setUsuarios={props.setUsuarios}
+                    viajes={props.viajes}
+                    setViajes={props.setViajes}
+                    setError={props.setError}
                 />)
                 break
-            case 1: console.log("No cambia")
-                return (<TarjetasMisViajes
-                    element={element}
-                    usuarioConectado={props.usuarioConectado}
-                    setUsuarioConectado={props.setUsuarioConectado}
-                    usuarios={props.suarios}
-                    setUsuarios={props.setUsuarios}
-                />)
+            case 1:
+                // return (<TarjetasMisViajes
+                //     element={element}
+                //     usuarioConectado={props.usuarioConectado}
+                //     setUsuarioConectado={props.setUsuarioConectado}
+                //     usuarios={props.suarios}
+                //     setUsuarios={props.setUsuarios}
+                // />)
                 break
-            case 2: console.log("Eliminar")
+            case 2:
                 break
         }
 
