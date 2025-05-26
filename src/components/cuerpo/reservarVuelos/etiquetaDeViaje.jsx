@@ -9,6 +9,7 @@ function EtiquetaDeViaje(props) {
     const navigate = useNavigate()
 
     function realizarCompra(e) {
+        console.log("error?")
         e.preventDefault()
         props.setVueloAComprar(props.element)
         navigate('/ReservarViajes/ComprarBillete')

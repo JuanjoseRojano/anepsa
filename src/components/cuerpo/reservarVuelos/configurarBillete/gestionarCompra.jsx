@@ -16,7 +16,7 @@ import visa from "../../../../media/visa.png"
 import imagine from "../../../../media/imagine.png"
 
 function GestionarCompra(props) {
-
+    console.log(props.viajeEncontrado)
     if (props.vueloAComprar === null) {
         return (<Navigate to='../ReservarViajes'></Navigate>)
 
