@@ -99,7 +99,7 @@ export function decodedToken(token) {
 
 export async function getMongoDB(ruta) {
     try {
-        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
             method: "GET",
         });
         if (!response.ok) {
@@ -116,7 +116,7 @@ export async function getMongoDB(ruta) {
 
 export async function deleteMongoDB(ruta) {
     try {
-        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
             method: "DELETE",
         });
         if (!response.ok) {
@@ -136,7 +136,7 @@ export async function deleteMongoDB(ruta) {
 export async function postMongoDB(ruta, data) {
     try {
         console.log(data)
-        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -165,7 +165,7 @@ export async function putMongoDB(ruta, data) {
         console.log(data)
         console.log(ruta)
 
-        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
