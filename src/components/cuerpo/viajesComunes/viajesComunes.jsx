@@ -50,9 +50,6 @@ function ViajesComunes(props) {
             if (numerosOrdenados.length != 10) {
                 numerosOrdenados.push(numero)
             }
-            // numerosOrdenados.push(numero)
-            console.log(numerosOrdenados)
-            console.log(diasOrdenados)
 
         })
 
@@ -105,7 +102,6 @@ function ViajesComunes(props) {
 
         <div className="mt-8 w-full flex justify-center">
             <div className="w-full max-w-2xl px-4">
-                {/* <div className="relative aspect-square w-full"> */}
 
                 <div className="relative h-64 sm:h-72 md:h-96">
                     <Pie data={data} options={options} />
@@ -116,5 +112,7 @@ function ViajesComunes(props) {
 
     )
 }
+
+
 
 export default ViajesComunes

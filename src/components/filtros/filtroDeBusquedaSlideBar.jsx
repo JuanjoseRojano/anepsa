@@ -25,7 +25,6 @@ function FiltroDeBusquedaSlideBar(props) {
 
 
     useEffect(() => {
-        console.log(valorSlider)
     }, [valorSlider])
 
     useEffect(() => {
@@ -132,7 +131,7 @@ function FiltroDeBusquedaSlideBar(props) {
                 setValorSlider([nuevoMin, valorSlider[1]])
                 props.cambiarTipoDeFiltroFunction("min", nuevoMin)
 
-                filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada, props.datoAfiltrar, "min", setAntiAsincronia)
+                filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada, props.datoAfiltrar, setAntiAsincronia)
                 break
 
             case 1:
@@ -142,7 +141,7 @@ function FiltroDeBusquedaSlideBar(props) {
 
                 filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada,
                     props.datoAfiltrar,
-                    "max", setAntiAsincronia)
+                    setAntiAsincronia)
                 break
 
             case 2:
@@ -169,10 +168,10 @@ function FiltroDeBusquedaSlideBar(props) {
 
             filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada,
                 props.datoAfiltrar,
-                "min", setAntiAsincronia)
+                setAntiAsincronia)
             filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada,
                 props.datoAfiltrar,
-                "max", setAntiAsincronia)
+                setAntiAsincronia)
 
         }
         setControlRefActualizarPorBoton(false)
@@ -234,7 +233,6 @@ function FiltroDeBusquedaSlideBar(props) {
                     onChange={(e, newValue, activeThumb) => {
 
                         movimientoSlider(newValue, activeThumb)
-                        filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada, "precio")
                     }}
                     valueLabelDisplay="auto"
                     getAriaValueText={valuetext}
@@ -251,3 +249,4 @@ function FiltroDeBusquedaSlideBar(props) {
 }
 
 export default FiltroDeBusquedaSlideBar
+

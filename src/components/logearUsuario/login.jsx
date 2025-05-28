@@ -47,7 +47,7 @@ function Login(props) {
                     viajes: []
                 }
 
-                await postMongoDB("/Usuarios/add", nuevoUsuario)
+                await postMongoDB("/Usuarios", nuevoUsuario)
                 props.setUsuarioConectado(nuevoUsuario)
                 props.setContenidoTokenUser(informacionUsuarioDecodificada)
 

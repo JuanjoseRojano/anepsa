@@ -5,6 +5,7 @@ export function filtrosDeBusqueda(
     tipoDeFiltro,
     setListaFiltrada,
     datoAFiltrar,
+    // slider,
     setAntiaSincronia) {
     //NOTA PERSONAL startsWith funciona solo con tipo string
 
@@ -98,7 +99,7 @@ export function decodedToken(token) {
 
 export async function getMongoDB(ruta) {
     try {
-        const response = await fetch(`https://servidorviajestienda.onrender.com/api${ruta}`, {
+        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
             method: "GET",
         });
         if (!response.ok) {
@@ -115,7 +116,7 @@ export async function getMongoDB(ruta) {
 
 export async function deleteMongoDB(ruta) {
     try {
-        const response = await fetch(`https://servidorviajestienda.onrender.com/api${ruta}`, {
+        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
             method: "DELETE",
         });
         if (!response.ok) {
@@ -135,7 +136,7 @@ export async function deleteMongoDB(ruta) {
 export async function postMongoDB(ruta, data) {
     try {
         console.log(data)
-        const response = await fetch(`https://servidorviajestienda.onrender.com/api${ruta}`, {
+        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -162,7 +163,9 @@ export async function postMongoDB(ruta, data) {
 export async function putMongoDB(ruta, data) {
     try {
         console.log(data)
-        const response = await fetch(`https://servidorviajestienda.onrender.com/api${ruta}`, {
+        console.log(ruta)
+
+        const response = await fetch(`http://api-viajes-next.vercel.app/api${ruta}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

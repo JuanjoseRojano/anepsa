@@ -25,7 +25,7 @@ function MostrarUsuario(props) {
 
     function eliminarUnUsuario(e) {
         e.preventDefault()
-        deleteMongoDB(`/Usuarios/eliminar/${props.usuarioConectado._id}`)
+        deleteMongoDB(`/Usuarios/${props.usuarioConectado._id}`)
         actualizar()
         cerrarSesion(e)
     }
@@ -170,4 +170,3 @@ function MostrarUsuario(props) {
 }
 
 export default MostrarUsuario
-

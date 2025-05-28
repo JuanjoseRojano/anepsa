@@ -16,7 +16,6 @@ import visa from "../../../../media/visa.png"
 import imagine from "../../../../media/imagine.png"
 
 function GestionarCompra(props) {
-    console.log(props.viajeEncontrado)
     if (props.vueloAComprar === null) {
         return (<Navigate to='../ReservarViajes'></Navigate>)
 
@@ -193,7 +192,7 @@ function GestionarCompra(props) {
                     idaYVuelta: checked
                 }
 
-                await postMongoDB(`/Usuarios/add/${props.usuarioConectado._id}/viajes`, vueloParaAñadir)
+                await postMongoDB(`/Usuarios/${props.usuarioConectado._id}/viajes`, vueloParaAñadir)
                 await putMongoDB(`/Viajes/${props.vueloAComprar._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes - manejoBilletes })
 
                 props.setUsuarios(await getMongoDB("/Usuarios"))
