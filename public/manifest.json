@@ -8,12 +8,12 @@
     "background_color": "#2196f3",
     "icons": [
         {
-            "src": "/src/icons/favicon-1.png",
+            "src": "/icons/favicon-1.png",
             "sizes": "256x256",
             "type": "image/png"
         },
         {
-            "src": "/src/icons/favicon-2.png",
+            "src": "/icons/favicon-2.png",
             "sizes": "128x128",
             "type": "image/png"
         }
