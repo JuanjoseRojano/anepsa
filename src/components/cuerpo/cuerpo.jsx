@@ -119,7 +119,7 @@ function Cuerpo(props) {
                 <Route path='/TusViajes' element={<TusViajes viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} setUsuarioConectado={props.setUsuarioConectado} usuarioConectado={props.usuarioConectado} setError={setError} />} />
                 <Route path="/ReservarViajes" element={<ReservarViajes usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setVueloAComprar={setVueloAComprar} />} />
                 {/* <Route path="/ViajesComunes" element={<ViajesComunes usuarios={props.usuarios} viajes={props.viajes} />} /> */}
-                <Route path="/ReservarViajes/ComprarBillete" element={<GestionarCompra error={setError} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setViajes={props.setViajes} setVueloAComprar={setVueloAComprar} vueloAComprar={vueloAComprar} />} />
+                <Route path="/ReservarViajes/ComprarBillete" element={<GestionarCompra setError={setError} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setViajes={props.setViajes} setVueloAComprar={setVueloAComprar} vueloAComprar={vueloAComprar} />} />
 
             </Routes>
         </SubirScroll>
