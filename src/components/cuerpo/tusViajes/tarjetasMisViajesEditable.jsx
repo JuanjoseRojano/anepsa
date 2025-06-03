@@ -26,7 +26,6 @@ function TarjetasMisViajesEditable(props) {
     const { precioDeLosBilletes, añadirIVA } = usePrecioDeLosBilletes(parseInt(props.element.precioTotal))
     const { manejoBilletes, sumar, resta } = useManejoBilletes(parseInt(props.element.numeroDeBilletes), parseInt(vueloDelViaje.numeroDeAsientosRestantes))
 
-    //Fechas para reservar vuelo
     const [fechaDelVuelo, setFechaDelVuelo] = useState(null)
 
     const fechaInicialDelVuelo = new Date(props.element.fechaDeVuelo)
@@ -108,7 +107,6 @@ function TarjetasMisViajesEditable(props) {
         const timer = setTimeout(() => {
             setMostrarCargandoDatos(null)
         }, 2000)
-        //limpiar timeout por si acaso
         return () => clearTimeout(timer)
     }
 
@@ -202,7 +200,6 @@ function TarjetasMisViajesEditable(props) {
             const timer = setTimeout(() => {
                 setMostrarCargandoDatos(null)
             }, 2000)
-            //limpiar timeout por si acaso
             return () => clearTimeout(timer)
         } else {
             eliminarBillete()

@@ -3,18 +3,6 @@
 @import "tailwindcss";
 
 
-
-/* @keyframes girar {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-} */
-
-
 body {
   font-family: 'Quicksand', sans-serif;
 }

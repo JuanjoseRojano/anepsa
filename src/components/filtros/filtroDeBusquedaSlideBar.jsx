@@ -90,32 +90,6 @@ function FiltroDeBusquedaSlideBar(props) {
     }
 
 
-    // Funcion aleatoria mejor que la que tenía y con mas margen de aleatoriedad
-    // function shuffle(array) {
-    //     const arr = array.slice()
-    //     for (let i = arr.length - 1; i > 0; i--) {
-    //         const j = Math.floor(Math.random() * (i + 1));
-    //         [arr[i], arr[j]] = [arr[j], arr[i]];
-    //     }
-
-    //     return arr
-    // }
-
-    // UseEffect con la funcion shuffle en funcionamiento
-    // useEffect(() => {
-
-    //     const mezclados = shuffle(props.viajes)
-    //     if (mezclados.length < 2) return
-
-    //     let precio1Predeterminado = mezclados[0].precio
-    //     let precio2Predeterminado = mezclados[1].precio
-
-    //     if (precio1Predeterminado >= precio2Predeterminado) { [precio1Predeterminado, precio2Predeterminado] = [precio2Predeterminado, precio1Predeterminado] }
-
-    //     setValorSlider([valorMinViajes, valorMaxViajes])
-    // }, [])
-
-
     function valuetext(value) {
         return value
     }

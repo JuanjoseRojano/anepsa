@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
-import { getMongoDB } from './funcionalidades/obtenerAPI';
+import { getMongoDB } from './funcionalidades/obtenerAPI'
 import Cargando from './components/cargando'
 import NavPrincipal from './components/nav/navPrincipal'
 import Cuerpo from './components/cuerpo/cuerpo'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google"
 
 import './index.css'
 import './App.css'
-import ComponenteFooter from './components/componenteFooter';
+import ComponenteFooter from './components/componenteFooter'
 function App() {
   const [usuarios, setUsuarios] = useState(null)
   const [viajes, setViajes] = useState(null)
@@ -21,14 +21,13 @@ function App() {
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      setUsuarioConectado(null);
-      setContenidoTokenUser(null);
-      googleLogout();
-      localStorage.clear();
-      sessionStorage.clear();
-    };
-    //beforeunload es un evento que me permite disparar algo justo antes de cerrar mi ventana
-    window.addEventListener('beforeunload', handleBeforeUnload);
+      setUsuarioConectado(null)
+      setContenidoTokenUser(null)
+      googleLogout()
+      localStorage.clear()
+      sessionStorage.clear()
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
 
   }, [])
 
@@ -62,7 +61,7 @@ function App() {
   }
 
   useEffect(() => {
-    setInterval(refrescarInformacion, 63200);
+    setInterval(refrescarInformacion, 63200)
   }, [])
 
   useEffect(() => {
@@ -71,8 +70,6 @@ function App() {
     getViajes()
   },
     [])
-
-
 
 
   if (usuarios === null || viajes === null) {

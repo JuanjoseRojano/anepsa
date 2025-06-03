@@ -5,7 +5,6 @@ function ErrorGeneral(props) {
     const [colorDeFondo, setColorDeFondo] = useState(" bg-red-100 border border-red-400 text-red-700")
 
 
-
     useEffect(() => {
         if (props.error === "Proceso finalizado con exito") {
             setColorDeFondo("bg-green-100 border border-green-400 text-green-700")
@@ -15,7 +14,7 @@ function ErrorGeneral(props) {
         }
 
         const timerError = setTimeout(() => {
-            props.setError("") // si quieres limpiar el error automáticamente
+            props.setError("")
         }, 2000)
 
         return () => clearTimeout(timerError)
@@ -27,7 +26,7 @@ function ErrorGeneral(props) {
 
     return <>
         <div className="min-h-screen bg-gray-100 p-4">
-            {/* Este valor seria falsy o truly evita cadenas vacias etc... */}
+
             {props.error && (
                 <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-sm sm:max-w-md md:max-w-lg">
                     <div
@@ -47,7 +46,7 @@ function ErrorGeneral(props) {
 
 
 }
-// bg-red-100 border border-red-400 text-red-700
+
 export default ErrorGeneral
 
 

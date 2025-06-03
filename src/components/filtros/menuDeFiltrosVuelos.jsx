@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import FiltroDeBusquedaInput from './filtroDeBusquedaInput'
 import FiltroDeBusquedaSlideBar from './filtroDeBusquedaSlideBar'
 
@@ -15,11 +15,9 @@ function MenuDeFiltrosVuelos(props) {
 
     function limpiarFiltrosYLista() {
         props.setOpcionesDeVuelo(null)
-        //Uso numeros ya que al usar boleano puede no disparar correctamente el rerenderizado ya que react puede re-renderizar 2 veces
+
         setLimpiar(limpiar + 1)
     }
-
-
 
 
     window.addEventListener('resize', () => {

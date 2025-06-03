@@ -1,7 +1,6 @@
 import { useState, useRef, use, useEffect } from 'react'
 import { comprarBilletes } from '../../../funcionalidades/obtenerAPI';
 import SelectViajes from '../../selectViajes';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Boton from '../../Boton'
 import DatepickerCalendario from './datePickerCalendario'
 

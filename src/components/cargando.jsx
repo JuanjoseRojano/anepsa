@@ -13,7 +13,6 @@ function Cargando(props) {
             </h1>
         </div>
     )
-    // Cargando base de datos...
 
 
 }

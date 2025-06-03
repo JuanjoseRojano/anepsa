@@ -1,16 +1,12 @@
-// const rutaPrincipal = "https://api-viajes-next.vercel.app/api"
-const rutaPrincipal = "http://localhost:3000/api"
+const rutaPrincipal = "https://api-viajes-next.vercel.app/api"
 
-//Funciones para filtros
 export function filtrosDeBusqueda(
     viajesSinFiltrar,
     setOpcionesDeVuelo,
     tipoDeFiltro,
     setListaFiltrada,
     datoAFiltrar,
-    // slider,
     setAntiaSincronia) {
-    //NOTA PERSONAL startsWith funciona solo con tipo string
 
     let coincidenciasDeLosFiltrosAplicados = viajesSinFiltrar.filter(viaje => viaje.destino.toLowerCase().startsWith(tipoDeFiltro.destino.toLowerCase()))
         .filter(viaje => viaje.salida.some((salida => salida.toLowerCase().startsWith(tipoDeFiltro.salida.toLowerCase()))))
@@ -21,8 +17,6 @@ export function filtrosDeBusqueda(
 
     if (!isNaN(filtroAsientos)) {
         coincidenciasDeLosFiltrosAplicados = coincidenciasDeLosFiltrosAplicados.filter(viaje => {
-            //El problema esque al tratar de filtrar por un numero, puedo no devolver nada y no dejar pasar al array y viceversa
-            //ademas el valor vacio ocasiona errores por lo tanto devuelvo true o false antes de filtrar
             return !isNaN(parseInt(viaje.numeroDeAsientosAvion, 10)) && parseInt(viaje.numeroDeAsientosAvion, 10) >= filtroAsientos
         })
     }
@@ -34,10 +28,6 @@ export function filtrosDeBusqueda(
     if (coincidenciasDeLosFiltrosAplicados.length > 0) {
 
         const listadoSinArrays = []
-
-        // NOTA algunos posibles resultados pueden ser arrays por lo tanto,
-        //  lo convierto todo a array para evitar valores duplicados y mostrar solo la informacion deseada
-        //aunque pueda parecer que pueda estar repitiendo codigo, el filtrado de aqui debe comportarse de manera diferente
 
         coincidenciasDeLosFiltrosAplicados.forEach((element) => {
             const valor = element[datoAFiltrar]
@@ -67,28 +57,16 @@ export function filtrosDeBusqueda(
 }
 
 
-
-
-
-
-
-
-//Decodificar token
-
 export function decodedToken(token) {
     try {
-        // Dividir el token en sus 3 partes: header, payload y signature
         const [headerB64, payloadB64, signatureB64] = token.split('.')
 
-        // Decodificar de Base64Url a Base64 estándar y luego a UTF-8
         const base64UrlToBase64 = (base64Url) => {
             return base64Url.replace(/-/g, '+').replace(/_/g, '/')
         }
 
         const decodedHeader = JSON.parse(atob(base64UrlToBase64(headerB64)))
         const decodedPayload = JSON.parse(atob(base64UrlToBase64(payloadB64)))
-        //ADVERTENCIA a diferencia de header y payload, signature es una cadena y no mantiene formato json por eso eliminamos JSON.parse()
-        //ademas signature es seguridad por lo tanto es totalmente inutil, no se puede desencriptar pues de eso se encarga google
         const decodedSignatureB64 = base64UrlToBase64(signatureB64)
 
         return {

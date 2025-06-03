@@ -27,7 +27,6 @@ function EtiquetaDeViaje(props) {
                     className="w-full h-full"
                     xmlns="http://www.w3.org/2000/svg"
                 >
-                    {/* Línea con ondas suaves y más planas */}
                     <path
                         d="
             M10 50
@@ -42,7 +41,6 @@ function EtiquetaDeViaje(props) {
                         strokeLinecap="round"
                     />
 
-                    {/* X al final */}
                     <g transform="translate(380,50)">
                         <line
                             x1="-10"

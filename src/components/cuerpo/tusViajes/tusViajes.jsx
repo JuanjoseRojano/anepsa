@@ -51,13 +51,7 @@ function TusViajes(props) {
                 />)
                 break
             case 1:
-                // return (<TarjetasMisViajes
-                //     element={element}
-                //     usuarioConectado={props.usuarioConectado}
-                //     setUsuarioConectado={props.setUsuarioConectado}
-                //     usuarios={props.suarios}
-                //     setUsuarios={props.setUsuarios}
-                // />)
+
                 break
             case 2:
                 break
@@ -93,13 +87,7 @@ function TusViajes(props) {
                     {
                         props.usuarioConectado.viajes.map((element) => (
                             separarTarjetas(element)
-                            // <TarjetasMisViajes
-                            //     element={element}
-                            //     usuarioConectado={props.usuarioConectado}
-                            //     setUsuarioConectado={props.setUsuarioConectado}
-                            //     usuarios={props.suarios}
-                            //     setUsuarios={props.setUsuarios}
-                            // />
+
                         ))
                     }
                 </div>

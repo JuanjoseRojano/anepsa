@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
-import { postMongoDB, getMongoDB, putMongoDB } from '../../../../funcionalidades/obtenerAPI';
+import { postMongoDB, getMongoDB, putMongoDB } from '../../../../funcionalidades/obtenerAPI'
 import SelectViajes from '../../../selectViajes'
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom"
 import Boton from '../../../Boton'
 import DatepickerCalendario from '../datePickerCalendario'
 import Cargando from '../../../cargando'
@@ -44,16 +44,13 @@ function GestionarCompra(props) {
 
         const precioOriginal = useRef(null)
 
-        //Eliminar
-        // const [errorDeFormulario, setErrorDeFormulario] = useState(null)
         const { precioDeLosBilletes, añadirIVA } = usePrecioDeLosBilletes()
         const { manejoBilletes, numeroDeAsientosRestantes, sumar, resta } = useManejoBilletes(0, props.vueloAComprar.numeroDeAsientosRestantes)
 
         const diseñoBotonesPequeños = "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 "
 
-        const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false);
+        const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false)
 
-        //Fechas para reservar vuelo
         const [fechaDelVuelo, setFechaDelVuelo] = useState(null)
 
         const fechaInicialDelVuelo = new Date()
@@ -85,11 +82,11 @@ function GestionarCompra(props) {
 
         function calcularNumeroDNI(DNI) {
 
-            let resultadoDNI = DNI % 23;
+            let resultadoDNI = DNI % 23
 
-            let arrayNumeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+            let arrayNumeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
-            const arrayDNI = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'];
+            const arrayDNI = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E']
             for (let cont = 0; cont < arrayNumeros.length; cont++) {
                 if (resultadoDNI == arrayNumeros[cont]) {
                     return DNI + arrayDNI[cont]
@@ -120,8 +117,8 @@ function GestionarCompra(props) {
 
             let enviarFormulario = true
 
-            const usuariosActuales = await getMongoDB("/Usuarios");
-            const viajesActuales = await getMongoDB("/Viajes");
+            const usuariosActuales = await getMongoDB("/Usuarios")
+            const viajesActuales = await getMongoDB("/Viajes")
 
             const usuarioEncontrado = usuariosActuales.find(usuario =>
                 usuario._id === props.usuarioConectado._id
@@ -253,7 +250,6 @@ function GestionarCompra(props) {
                 setMostrarCargandoDatos(null)
                 salirDeCompra('../ReservarViajes')
             }, 3000)
-            //limpiar timeout por si acaso
             return () => clearTimeout(timer)
         }
 
@@ -472,7 +468,6 @@ function GestionarCompra(props) {
                                                 <h1 ref={precioDeBilleteFinal} className="text-lg font-medium text-gray-700">
                                                     {precioDeLosBilletes * (checked ? 2 : 1) + "€"}
                                                 </h1>
-                                                {/* <p className="ml-1">€</p> */}
                                             </div>
                                         </div>
                                     </div>

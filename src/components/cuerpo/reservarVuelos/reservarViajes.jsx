@@ -35,9 +35,7 @@ function ReservarViajes(props) {
 
 
     useEffect(() => {
-        //NOTA PERSONAL al estar escritos en formato JSON es posible realizar comparacion de si son 
-        // iguales o diferentes de manera que al ser ambos arrays, unicamente pueden ser iguales si
-        // apuntasen al mismo espacio de memoria
+
         if (opcionesDeVuelos === null || JSON.stringify(opcionesDeVuelos) === JSON.stringify(props.viajes) && tipoDeFiltro.numeroDeAsientosRestantes === "") {
 
             const mezclarVuelos = viajes => viajes.slice().sort(() => Math.random() - 0.5)

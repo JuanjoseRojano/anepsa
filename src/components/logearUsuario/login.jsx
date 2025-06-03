@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google"
 import { decodedToken, getMongoDB, postMongoDB, deleteMongoDB, putMongoDB } from "../../funcionalidades/obtenerAPI"
@@ -7,7 +7,6 @@ import { isBefore } from 'date-fns'
 import Cargando from '../cargando'
 function Login(props) {
 
-    // const estiloBoton = "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all mt-4"
     const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false);
 
     async function eliminarViajePorFecha(usuarioEncontrado) {
@@ -21,11 +20,9 @@ function Login(props) {
             return isBefore(fechaVuelo, fechaActual)
         })
 
-        // Si quiero realizar una espera por cada elemento debo usar promise all de lo contrario puede darse problemas de asincronia
-        //debido a que la ejecucion no esperaria a todos los deletes
+
         return Promise.all(
-            //El map puede ser async para asi internamente esperar a put y luego devuielve el delete en el promise
-            //de modo que con eso puedo dejearlo en espera
+
             viajesAEliminar.map(async (element) => {
                 const viajeEncontrado = props.viajes.find((viaje) => element.destino === viaje.destino)
                 await putMongoDB(`/Viajes/${viajeEncontrado._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes + element.numeroDeAsientosRestantes })
@@ -72,7 +69,7 @@ function Login(props) {
         const timer = setTimeout(() => {
             setMostrarCargandoDatos(null)
         }, 3000)
-        //limpiar timeout por si acaso
+
         return () => clearTimeout(timer)
     }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import lupa from '../../../media/lupa.png'
 
 function DestinoAleatorio(props) {
