@@ -82,7 +82,7 @@ function EtiquetaDeViaje(props) {
                     </select>
 
                     <h3 className="mb-2">{props.element.numeroDeAsientosRestantes} asientos restantes</h3>
-                    <h3>{props.element.numeroDeAsientosRestantes} € el billete</h3>
+                    <h3>{props.element.precio} € el billete</h3>
 
                 </div>
             </div>
@@ -98,35 +98,7 @@ function EtiquetaDeViaje(props) {
 
         </div>
 
-        {/* <div className="bg-white p-6 rounded-xl border-2 border-gray-300 shadow-lg max-w-md w-full text-center m-4 z-20 max-h-200">
-            <h1 className="text-2xl font-semibold text-gray-800">{props.element.destino}</h1>
-            <div className=' max-w-400 h-50'>
 
-                <img
-                    src={props.element.imagen}
-                    alt={props.element.destino}
-                    className="w-full h-full object-cover rounded-lg shadow-lg"
-                />
-
-            </div>
-
-            <div className="grid w-full  gap-4 m-3 bg-amber-600">
-
-                <select className="p-2 border border-gray-300 rounded-md text-lg" required>
-                    <SelectViajes opciones={props.element.salida} />
-                </select>
-
-                <h3 className='w-full'>{props.element.numeroDeAsientosRestantes} asientos restantes</h3>
-                <h3>{props.element.numeroDeAsientosRestantes} € el billete</h3>
-            </div>
-
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md text-lg transition duration-300"
-                onClick={((e) => { realizarCompra(e) })}
-            >
-                Comprar
-            </button>
-
-        </div > */}
     </>
 
 

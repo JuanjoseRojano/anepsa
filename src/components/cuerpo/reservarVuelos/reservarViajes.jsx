@@ -41,12 +41,16 @@ function ReservarViajes(props) {
         if (opcionesDeVuelos === null || JSON.stringify(opcionesDeVuelos) === JSON.stringify(props.viajes) && tipoDeFiltro.numeroDeAsientosRestantes === "") {
 
             const mezclarVuelos = viajes => viajes.slice().sort(() => Math.random() - 0.5)
+
+
+
             const vuelosMezclados = mezclarVuelos(props.viajes)
             setRenderizarProductos(<div className="flex justify-center items-center p-3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4  justify-center p-3">
-                    {vuelosMezclados.map((element) => (
-                        <EtiquetaDeViaje element={element} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} setVueloAComprar={props.setVueloAComprar} />
-                    ))}
+                    {vuelosMezclados
+                        .filter(element => element.numeroDeAsientosRestantes > 0).map((element) => element.numeroDeAsientosRestantes !== 0 ? (
+                            <EtiquetaDeViaje element={element} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} setVueloAComprar={props.setVueloAComprar} />
+                        ) : null)}
                 </div>
             </div>
             )

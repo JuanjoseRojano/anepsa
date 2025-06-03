@@ -4,7 +4,7 @@ import Muestras from './muestras'
 import Login from '../logearUsuario/login'
 import ReservarViajes from './reservarVuelos/reservarViajes'
 import TusViajes from './tusViajes/tusViajes'
-import ViajesComunes from './viajesComunes/viajesComunes'
+import ViajesComunes from './viajesComunes'
 import DestinoAleatorio from './destinoAleatorioCompra/destinoAleatorio'
 import ErrorGeneral from '../error'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
@@ -101,14 +101,13 @@ function Cuerpo(props) {
                             <Muestras titulo={titulo2} subtitulo={subtitulo2} texto={texto2} />
                             <div className="w-2/5 shrink-0">
                                 <img
-                                    src="https://www.lowcostparking.es/blog/wp-content/uploads/2018/03/pruebas-de-seguridad-en-los-aviones-730x410.jpg"
+                                    src="https://album.mediaset.es/eimg/2024/06/27/las-luces-del-avion-se-apagan-en-el-despegue-y-el-aterrizaje-por-seguridad_c514.jpg?w=1024"
                                     alt="card-image"
                                     className="h-full w-full object-cover"
                                 />
                             </div>
                         </div>
                     </div>
-
 
 
                 </>} />
@@ -118,7 +117,6 @@ function Cuerpo(props) {
                 <Route path="/Sesion" element={componenteUsuario} setError={setError} />
                 <Route path='/TusViajes' element={<TusViajes viajes={props.viajes} setViajes={props.setViajes} usuarios={props.usuarios} setUsuarios={props.setUsuarios} setUsuarioConectado={props.setUsuarioConectado} usuarioConectado={props.usuarioConectado} setError={setError} />} />
                 <Route path="/ReservarViajes" element={<ReservarViajes usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setVueloAComprar={setVueloAComprar} />} />
-                {/* <Route path="/ViajesComunes" element={<ViajesComunes usuarios={props.usuarios} viajes={props.viajes} />} /> */}
                 <Route path="/ReservarViajes/ComprarBillete" element={<GestionarCompra setError={setError} usuarios={props.usuarios} setUsuarios={props.setUsuarios} usuarioConectado={props.usuarioConectado} setUsuarioConectado={props.setUsuarioConectado} viajes={props.viajes} setViajes={props.setViajes} setVueloAComprar={setVueloAComprar} vueloAComprar={vueloAComprar} />} />
 
             </Routes>

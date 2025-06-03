@@ -27,42 +27,5 @@ function DatePickerCalendario(props) {
     )
 
 }
-// 🔍 Comparación
-// isBefore(date1, date2)
-
-// isAfter(date1, date2)
-
-// isSameDay(date1, date2)
-
-// compareAsc(), compareDesc()
-
-// 🕒 Formato
-// format() – formatea la fecha con patrones como 'dd/MM/yyyy'
-
-// formatDistance() – "hace 2 días", "en 5 minutos", etc.
-
-// formatRelative() – "mañana a las 10", "ayer", etc.
-
-// 📊 Rangos y duración
-// differenceInDays(), differenceInMonths(), etc.
-
-// intervalToDuration()
-
-// eachDayOfInterval(), eachWeekOfInterval(), etc.
-
-// ✅ Validación
-// isValid()
-
-// parse() – para convertir string a Date
-
-// ⏱️ Otros útiles
-// parseISO() – útil si trabajas con fechas en formato ISO
-
-// toDate() – convierte timestamps o strings a Date
-
-// getDaysInMonth()
-
-
-
 
 export default DatePickerCalendario

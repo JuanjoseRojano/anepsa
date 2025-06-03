@@ -49,7 +49,6 @@ function GestionarCompra(props) {
         const { precioDeLosBilletes, añadirIVA } = usePrecioDeLosBilletes()
         const { manejoBilletes, numeroDeAsientosRestantes, sumar, resta } = useManejoBilletes(0, props.vueloAComprar.numeroDeAsientosRestantes)
 
-        // const classNameError = useClassNameError(errorDeFormulario)
         const diseñoBotonesPequeños = "text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 "
 
         const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false);
@@ -170,41 +169,86 @@ function GestionarCompra(props) {
                     props.setError("Vuelo ya existente")
                     enviarFormulario = false
                 }
-            }
 
-            if (enviarFormulario != false) {
+                if (enviarFormulario != false) {
 
-                const vueloParaAñadir = {
-                    responsable: [{
-                        nombre: nombreResponsable.current.value,
-                        apellido: apellidoResponsableRef.current.value,
-                        fechaNac: fechaNac.toISOString(),
-                        DNIResponsable: DNIResponsable.current.value,
-                    }],
-                    destino: nombreDestino.current.textContent,
-                    imagen: [imagenDestino.current.src],
-                    salida: nombreSalida.current.value,
-                    horarioDeVuelo: horaDeSalida.current.value,
-                    fechaDeVuelo: fechaDelVuelo.toISOString(),
-                    precioDelVuelo: precioOriginal.current.textContent,
-                    precioDelVueloFinal: precioDeLosBilletes,
-                    numeroDeBilletes: manejoBilletes,
-                    idaYVuelta: checked
+                    const vueloParaAñadir = {
+
+                        responsable: [{
+                            nombre: nombreResponsable.current.value,
+                            apellido: apellidoResponsableRef.current.value,
+                            fechaNac: fechaNac.toISOString(),
+                            DNIResponsable: DNIResponsable.current.value,
+                        }],
+                        destino: nombreDestino.current.textContent,
+                        imagen: [imagenDestino.current.src],
+                        salida: nombreSalida.current.value,
+                        horarioDeVuelo: horaDeSalida.current.value,
+                        fechaDeVuelo: fechaDelVuelo.toISOString(),
+                        precioDelVuelo: precioOriginal.current.textContent,
+                        precioDelVueloFinal: precioDeLosBilletes,
+                        numeroDeBilletes: manejoBilletes,
+                        idaYVuelta: checked
+                    }
+
+                    await postMongoDB(`/Usuarios/${props.usuarioConectado._id}/viajes`, vueloParaAñadir)
+                    await putMongoDB(`/Viajes/${props.vueloAComprar._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes - manejoBilletes })
+
+                    props.setUsuarios(await getMongoDB("/Usuarios"))
+
+                    props.setViajes(await getMongoDB("/Viajes"))
+
+                    const usuarioConectadoTrasComprar = await getMongoDB("/Usuarios")
+                    props.setUsuarioConectado(usuarioConectadoTrasComprar.find(usuario =>
+                        usuario._id === props.usuarioConectado._id
+                    ))
+
+
                 }
 
-                await postMongoDB(`/Usuarios/${props.usuarioConectado._id}/viajes`, vueloParaAñadir)
-                await putMongoDB(`/Viajes/${props.vueloAComprar._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes - manejoBilletes })
 
-                props.setUsuarios(await getMongoDB("/Usuarios"))
-
-                props.setViajes(await getMongoDB("/Viajes"))
-
-                const usuarioConectadoTrasComprar = await getMongoDB("/Usuarios")
-                props.setUsuarioConectado(usuarioConectadoTrasComprar.find(usuario =>
-                    usuario._id === props.usuarioConectado._id
-                ))
 
             }
+            else {
+
+                if (enviarFormulario != false) {
+
+                    const vueloParaAñadir = {
+                        responsable: [{
+                            nombre: nombreResponsable.current.value,
+                            apellido: apellidoResponsableRef.current.value,
+                            fechaNac: fechaNac.toISOString(),
+                            DNIResponsable: DNIResponsable.current.value,
+                        }],
+                        destino: nombreDestino.current.textContent,
+                        imagen: [imagenDestino.current.src],
+                        salida: nombreSalida.current.value,
+                        horarioDeVuelo: horaDeSalida.current.value,
+                        fechaDeVuelo: fechaDelVuelo.toISOString(),
+                        precioDelVuelo: precioOriginal.current.textContent,
+                        precioDelVueloFinal: precioDeLosBilletes,
+                        numeroDeBilletes: manejoBilletes,
+                        idaYVuelta: checked
+                    }
+
+                    await postMongoDB(`/Usuarios/${props.usuarioConectado._id}/viajes`, vueloParaAñadir)
+                    await putMongoDB(`/Viajes/${props.vueloAComprar._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes - manejoBilletes })
+
+                    props.setUsuarios(await getMongoDB("/Usuarios"))
+
+                    props.setViajes(await getMongoDB("/Viajes"))
+
+                    const usuarioConectadoTrasComprar = await getMongoDB("/Usuarios")
+                    props.setUsuarioConectado(usuarioConectadoTrasComprar.find(usuario =>
+                        usuario._id === props.usuarioConectado._id
+                    ))
+                }
+
+
+            }
+
+
+
             const timer = setTimeout(() => {
                 setMostrarCargandoDatos(null)
                 salirDeCompra('../ReservarViajes')
@@ -246,12 +290,12 @@ function GestionarCompra(props) {
                     comprobacionDeEnvioFormularioDeCompra()
                 }}
                     className='m-7 relative'>
-                    <div className="flex flex-col md:flex-row gap-6">
+                    <div className="flex flex-col lg:flex-row gap-6">
                         <div className="flex flex-col md:basis-2/3 gap-6">
                             <div className="bg-blue-50 rounded-xl border border-blue-200  p-4  shadow-md">
                                 <h1 className="text-xl font-semibold mb-4">Datos del usuario</h1>
 
-                                <label className="block mb-2 font-medium">Nombre del responsable</label>
+                                <label className="block mb-2 font-medium tituloAzul">Nombre del responsable</label>
                                 <input
                                     type="text"
                                     ref={nombreResponsable}
@@ -262,7 +306,7 @@ function GestionarCompra(props) {
                                     className="w-full p-2 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                                 />
 
-                                <label className="block mb-2 font-medium">Apellido del responsable</label>
+                                <label className="block mb-2 font-medium tituloAzul">Apellido del responsable</label>
                                 <input
                                     type="text"
                                     ref={apellidoResponsableRef}
@@ -284,7 +328,7 @@ function GestionarCompra(props) {
                                     />
                                 </div>
 
-                                <label className="block mb-2 font-medium">DNI del responsable</label>
+                                <label className="block mb-2 font-medium tituloAzul">DNI del responsable</label>
                                 <input
                                     type="text"
                                     ref={DNIResponsable}
@@ -296,7 +340,7 @@ function GestionarCompra(props) {
                                 />
                             </div>
                             <div className='bg-blue-50 rounded-xl border border-blue-200  shadow-md text-white  items-center p-4'>
-                                <h1 className="text-xl font-semibold mb-4 mask-y-from-4 text-black">Método de pago</h1>
+                                <h1 className="text-xl font-semibold mb-4 mask-y-from-4 text-black tituloAzul">Método de pago</h1>
 
                                 <div className=" flex flex-col md:grid md:grid-cols-3 md:grid-rows-2 justify-center gap-7 p-5 ">
 
@@ -402,7 +446,7 @@ function GestionarCompra(props) {
                                                 ref={precioOriginal}
                                                 className="flex items-center p-1 bg-gradient-to-r from-green-200 via-blue-200 to-purple-200 rounded-xl"
                                             >
-                                                {props.vueloAComprar.precio}
+                                                {props.vueloAComprar.precio + "€"}
                                             </h1>
                                         </div>
 
@@ -428,7 +472,7 @@ function GestionarCompra(props) {
                                                 <h1 ref={precioDeBilleteFinal} className="text-lg font-medium text-gray-700">
                                                     {precioDeLosBilletes * (checked ? 2 : 1) + "€"}
                                                 </h1>
-                                                <p className="ml-1">€</p>
+                                                {/* <p className="ml-1">€</p> */}
                                             </div>
                                         </div>
                                     </div>

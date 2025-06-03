@@ -55,13 +55,7 @@ function MostrarUsuario(props) {
             setViajesEncontrados(<div>
                 {props.usuarioConectado.viajes.map((element) => {
                     const diaDelVuelo = format(new Date(element.fechaDeVuelo), 'dd/MM/yyyy')
-                    // const diaDelVuelo = new Date(element.fechaDeVuelo)
-                    // const diaActual = new Date()
 
-                    // if (isSameDay(diaDelVuelo, diaActual)) {
-                    //     setFechaViaje()
-
-                    // }
                     let idaYVuelta
                     if (element.idaYVuelta === true) {
                         idaYVuelta = "Ida y vuelta 🔄"
@@ -79,15 +73,21 @@ function MostrarUsuario(props) {
                             <img src={element.imagen} alt={element.destino} className="w-full max-h-70 object-cover rounded-md mb-4" />
                             <div className=''>
                                 <div className="flex flex-col md:flex-row  items-center space-x-2 space-y-2   mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
-                                    <span className={estilosSpan}>Salida: {element.salida}</span>
-                                    <span className={estilosSpan}>Hora de llegada: {element.horarioDeVuelo}</span>
-                                    <span className={estilosSpan}>Dia viaje: {diaDelVuelo}</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>Salida:</span> {element.salida}</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>Hora de llegada:</span> {element.horarioDeVuelo}</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>Dia viaje:</span> {diaDelVuelo}</span>
                                 </div>
 
                                 <div className="flex flex-col md:flex-row items-center space-x-2 space-y-2 mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
-                                    <span className={estilosSpan}>Número de billetes: {element.numeroDeBilletes}</span>
-                                    <span className={estilosSpan}>Precio: {element.precioDelVueloFinal} €</span>
-                                    <span className={estilosSpan}>{idaYVuelta}</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>Número de billetes:</span> {element.numeroDeBilletes}</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>Precio:</span> {element.precioDelVueloFinal} €</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>{idaYVuelta}</span></span>
+                                </div>
+
+                                <div className="flex flex-col md:flex-row items-center space-x-2 space-y-2 mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
+                                    <span className={`${estilosSpan} grid`}><span className='tituloAzul'>Nombre y apellidos responsable:</span> {element.responsable[0].nombre} {element.responsable[0].apellido}</span>
+                                    <span className={`${estilosSpan} grid`}><span className='tituloAzul'>DNI responsable:</span> {element.responsable[0].DNIResponsable} €</span>
+                                    <span className={`${estilosSpan} grid`}><span className='tituloAzul'>Fecha de nacimiento responsable:</span>{format(new Date(element.responsable[0].fechaNac), 'dd/MM/yyyy')}</span>
                                 </div>
                             </div>
                         </div>
@@ -108,10 +108,9 @@ function MostrarUsuario(props) {
         }
     }, [])
 
-    const estilosSpan = "ml-2 my-4 text-gray-700 font-medium bg-blue-100 border-l-4 border-blue-500 px-2 py-1 rounded-lg"
+    const estilosSpan = " text-lg ml-2 my-4 text-gray-700 font-medium bg-blue-100 border-l-4 border-blue-500 px-2 py-1 rounded-lg"
 
     return (<>
-        {/* <div className='p-2 md:flex gap-16 m-10'> */}
         <div className="flex flex-col-reverse md:flex-row gap-6 p-4 ">
             <div className='md:w-2/3 my-7 '>
                 <h1 className="text-xl md:text-2xl font-bold text-blue-600 bg-blue-100 border-l-4 border-blue-500 p-4 rounded-lg shadow-md my-2">
@@ -123,7 +122,6 @@ function MostrarUsuario(props) {
                 </div>
             </div>
 
-            {/* <div className="w-full md:w-1/3 md:sticky md:top-30 self-start"> */}
             <div className="w-full md:w-1/3 md:order-last md:sticky md:top-30 self-start">
                 <div className={`border rounded-lg shadow-md bg-white p-4 overflow-auto `}
                     style={{ maxHeight: `${altoDinamico}px` }}
@@ -137,16 +135,16 @@ function MostrarUsuario(props) {
                             />
                         </div>
                         <span className={estilosSpan}>
-                            Nombre de usuario: {props.contenidoTokenUser.payload.name}
+                            <span className='tituloAzul'>Nombre de usuario:</span> {props.contenidoTokenUser.payload.name}
                         </span>
                         <span className={estilosSpan}>
-                            Dirección email: {props.contenidoTokenUser.payload.email}
+                            <span className='tituloAzul'>Dirección email:</span> {props.contenidoTokenUser.payload.email}
                         </span>
                         <span className={estilosSpan}>
-                            Cuenta verificada: <span>{emailVerificado}</span>
+                            <span className='tituloAzul'>Cuenta verificada:</span> <span>{emailVerificado}</span>
                         </span>
                         <span className={estilosSpan}>
-                            Número de viajes activos: {props.usuarioConectado.viajes.length}
+                            <span className='tituloAzul'>Número de viajes activos:</span> {props.usuarioConectado.viajes.length}
                         </span>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
                             <Boton

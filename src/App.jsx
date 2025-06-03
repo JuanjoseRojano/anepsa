@@ -73,6 +73,8 @@ function App() {
     [])
 
 
+
+
   if (usuarios === null || viajes === null) {
 
     return (<Cargando textoCargando={"Accediendo a la base de datos..."} />)

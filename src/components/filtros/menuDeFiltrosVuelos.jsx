@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import FiltroDeBusquedaInput from './filtroDeBusquedaInput'
 import FiltroDeBusquedaSlideBar from './filtroDeBusquedaSlideBar'
-import Boton from '../Boton'
+
 function MenuDeFiltrosVuelos(props) {
 
     const [mostrarOcultarMenu, setMostrarOcultarMenu] = useState(false)

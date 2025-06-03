@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import SeccionNav from "./seccionNav"
 import login from "../../media/login.png"
 import viaje from "../../media/viaje.png"
 import ticket from "../../media/ticket.png"
-// import staff from "../../media/staff.png"
 import logo from "../../media/logo.png"
 import '../../App.css'
 

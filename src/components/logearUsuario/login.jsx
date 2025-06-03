@@ -1,40 +1,46 @@
 import { useState, useRef, useEffect } from 'react'
 
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google"
 import { decodedToken, getMongoDB, postMongoDB, deleteMongoDB, putMongoDB } from "../../funcionalidades/obtenerAPI"
 import fondoLogIn from "../../media/fondoLogIn.jpg"
-import { isBefore } from 'date-fns';
-
+import { isBefore } from 'date-fns'
+import Cargando from '../cargando'
 function Login(props) {
 
     // const estiloBoton = "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all mt-4"
+    const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false);
 
     async function eliminarViajePorFecha(usuarioEncontrado) {
 
+
         const fechaActual = new Date()
 
-        const viajeAEliminar = usuarioEncontrado.viajes.filter((viaje) => {
+        const viajesAEliminar = usuarioEncontrado.viajes.filter((viaje) => {
 
             const fechaVuelo = new Date(viaje.fechaDeVuelo)
             return isBefore(fechaVuelo, fechaActual)
         })
-
 
         // Si quiero realizar una espera por cada elemento debo usar promise all de lo contrario puede darse problemas de asincronia
         //debido a que la ejecucion no esperaria a todos los deletes
         return Promise.all(
             //El map puede ser async para asi internamente esperar a put y luego devuielve el delete en el promise
             //de modo que con eso puedo dejearlo en espera
-            viajeAEliminar.map(async (element) => {
+            viajesAEliminar.map(async (element) => {
                 const viajeEncontrado = props.viajes.find((viaje) => element.destino === viaje.destino)
-                await putMongoDB(`/Viajes/${element._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes + element.numeroDeAsientosRestantes })
-
+                await putMongoDB(`/Viajes/${viajeEncontrado._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes + element.numeroDeAsientosRestantes })
                 return deleteMongoDB(`/Usuarios/${usuarioEncontrado._id}/viajes/${element._id}`)
             }))
     }
 
 
     function iniciarSesion(response) {
+
+        setMostrarCargandoDatos(<div className="sticky inset-0 bg-grey bg-opacity-50 flex items-center justify-center z-[40]">
+            <Cargando
+                textoCargando={"Actualizando base de datos"} />
+        </div>)
+
         const informacionUsuarioDecodificada = decodedToken(response.credential)
 
         const buscarUsuario = async () => {
@@ -63,6 +69,11 @@ function Login(props) {
             }
         }
         buscarUsuario()
+        const timer = setTimeout(() => {
+            setMostrarCargandoDatos(null)
+        }, 3000)
+        //limpiar timeout por si acaso
+        return () => clearTimeout(timer)
     }
 
 
@@ -151,6 +162,7 @@ function Login(props) {
             </div>
         </div>
 
+        {mostrarCargandoDatos}
 
 
 

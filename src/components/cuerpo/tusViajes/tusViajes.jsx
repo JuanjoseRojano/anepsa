@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-// import TarjetasMisViajes from './tarjetasMisViajes';
 import TarjetasMisViajesEditable from './tarjetasMisViajesEditable';
 
 import { isBefore } from 'date-fns';
@@ -76,7 +75,7 @@ function TusViajes(props) {
 
         return (
             <div className="flex flex-col items-center mt-6">
-                <h2 className="text-xl text-gray-600">Sin viajes en espera pulsa <Link to="/ReservarViajes">Aquí</Link> para comprar alguno</h2>
+                <h2 className="text-xl text-gray-600">Sin viajes en espera pulsa <span className='text-blue-400 hover:font-bold hover:text-blue-500'><Link to="/ReservarViajes">Aquí</Link></span> para comprar alguno</h2>
                 <img
                     src="https://blog.selfbank.es/wp-content/uploads/2018/03/iStock-584759976.jpg"
                     alt="Sin viajes"

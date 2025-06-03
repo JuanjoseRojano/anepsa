@@ -1,3 +1,6 @@
+// const rutaPrincipal = "https://api-viajes-next.vercel.app/api"
+const rutaPrincipal = "http://localhost:3000/api"
+
 //Funciones para filtros
 export function filtrosDeBusqueda(
     viajesSinFiltrar,
@@ -23,6 +26,9 @@ export function filtrosDeBusqueda(
             return !isNaN(parseInt(viaje.numeroDeAsientosAvion, 10)) && parseInt(viaje.numeroDeAsientosAvion, 10) >= filtroAsientos
         })
     }
+
+    coincidenciasDeLosFiltrosAplicados = coincidenciasDeLosFiltrosAplicados.filter(viaje => viaje.numeroDeAsientosRestantes > 0)
+
 
 
     if (coincidenciasDeLosFiltrosAplicados.length > 0) {
@@ -99,7 +105,7 @@ export function decodedToken(token) {
 
 export async function getMongoDB(ruta) {
     try {
-        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`${rutaPrincipal}${ruta}`, {
             method: "GET",
         });
         if (!response.ok) {
@@ -116,7 +122,7 @@ export async function getMongoDB(ruta) {
 
 export async function deleteMongoDB(ruta) {
     try {
-        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`${rutaPrincipal}${ruta}`, {
             method: "DELETE",
         });
         if (!response.ok) {
@@ -124,6 +130,7 @@ export async function deleteMongoDB(ruta) {
         }
         const result = await response.json();
         console.log(result)
+        // console.log(ruta)
         return result
     } catch (error) {
         console.error("Error:", error.message);
@@ -136,7 +143,7 @@ export async function deleteMongoDB(ruta) {
 export async function postMongoDB(ruta, data) {
     try {
         console.log(data)
-        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`${rutaPrincipal}${ruta}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -165,7 +172,7 @@ export async function putMongoDB(ruta, data) {
         console.log(data)
         console.log(ruta)
 
-        const response = await fetch(`https://api-viajes-next.vercel.app/api${ruta}`, {
+        const response = await fetch(`${rutaPrincipal}${ruta}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

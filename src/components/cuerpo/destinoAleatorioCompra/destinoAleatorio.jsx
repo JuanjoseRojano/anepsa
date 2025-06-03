@@ -4,7 +4,6 @@ import lupa from '../../../media/lupa.png'
 function DestinoAleatorio(props) {
 
     const [destinoAleatorio, setDestinoAleatorio] = useState(null)
-    const [destinoSeleccionado, setDestinoSeleccionado] = useState(props.viajes[0].destino)
 
 
 
@@ -22,20 +21,18 @@ function DestinoAleatorio(props) {
 
     return (
         <>
-            <div className="bg-blue-100 flex flex-col md:flex-row p-3  mx-28 gap-4 md:flex  md:justify-center md:items-center md:space-x-5 md:p-4 border-solid  rounded-xl ">
+            <div className="bg-blue-100 flex flex-col md:flex-row p-3   gap-10 md:flex  md:justify-center md:items-center md:space-x-5 md:p-4 border-solid  rounded-xl mx-auto">
                 <div className='mx-auto'>
                     <img src={lupa} alt="Lupa" className="w-12 h-12" />
                 </div>
-                <div className="text-lg font-semibold text-gray-700 md:w-32 mx-auto">
+                <div className="text-lg font-semibold text-gray-700  mx-auto">
                     <p>{destinoAleatorio}</p>
                 </div>
-
-                <p className="text-xl text-gray-600 mx-auto">¿Dónde quieres ir?</p>
-
+                <div className="text-lg font-semibold text-gray-700  mx-auto text-center">
+                    <p className="text-xl text-gray-600 mx-auto">¿Dónde quieres ir?</p>
+                </div>
             </div>
-
         </>
     )
 }
-
 export default DestinoAleatorio

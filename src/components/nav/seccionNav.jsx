@@ -6,11 +6,9 @@ function SeccionNav(props) {
             <img
                 src={props.imagenNav}
                 alt={props.nombreSeccionNav}
-                className="w-10 h-10 rounded-full"
+                className="w-20 h-20 rounded-full"
             />
             <p className="text-white text-lg font-medium">{props.nombreSeccionNav}</p>
-
-
         </div>
 
     )
