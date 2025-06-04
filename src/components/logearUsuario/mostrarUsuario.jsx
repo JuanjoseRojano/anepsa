@@ -74,7 +74,7 @@ function MostrarUsuario(props) {
                             <div className=''>
                                 <div className="flex flex-col md:flex-row  items-center space-x-2 space-y-2   mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
                                     <span className={estilosSpan}><span className='tituloAzul'>Salida:</span> {element.salida}</span>
-                                    <span className={estilosSpan}><span className='tituloAzul'>Hora de llegada:</span> {element.horarioDeVuelo}</span>
+                                    <span className={estilosSpan}><span className='tituloAzul'>Hora de salida:</span> {element.horarioDeVuelo}</span>
                                     <span className={estilosSpan}><span className='tituloAzul'>Dia viaje:</span> {diaDelVuelo}</span>
                                 </div>
 
@@ -86,7 +86,7 @@ function MostrarUsuario(props) {
 
                                 <div className="flex flex-col md:flex-row items-center space-x-2 space-y-2 mt-4 bg-stone-100 p-6 rounded-xl border border-blue-200 shadow-lg w-full  mb-4">
                                     <span className={`${estilosSpan} grid`}><span className='tituloAzul'>Nombre y apellidos responsable:</span> {element.responsable[0].nombre} {element.responsable[0].apellido}</span>
-                                    <span className={`${estilosSpan} grid`}><span className='tituloAzul'>DNI responsable:</span> {element.responsable[0].DNIResponsable} €</span>
+                                    <span className={`${estilosSpan} grid`}><span className='tituloAzul'>DNI responsable:</span> {element.responsable[0].DNIResponsable} </span>
                                     <span className={`${estilosSpan} grid`}><span className='tituloAzul'>Fecha de nacimiento responsable:</span>{format(new Date(element.responsable[0].fechaNac), 'dd/MM/yyyy')}</span>
                                 </div>
                             </div>
