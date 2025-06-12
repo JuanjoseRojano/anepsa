@@ -22,7 +22,7 @@ function MostrarUsuario(props) {
         const usuariosActualizados = await getMongoDB("/Usuarios")
         props.setUsuarios(usuariosActualizados)
     }
-
+    //Aqui encontramos funciones para que el usuario gestione su estancia como borrar o cerrar sesion
     function eliminarUnUsuario(e) {
         e.preventDefault()
         deleteMongoDB(`/Usuarios/${props.usuarioConectado._id}`)
@@ -39,7 +39,7 @@ function MostrarUsuario(props) {
         sessionStorage.clear();
     }
 
-
+    //Este useEffect devuelve cambia el componente que se renderiza en caso de tener o no tener viajes agregados
     useEffect(() => {
         if (props.usuarioConectado.viajes.length === 0) {
             setTextoTituloSuperior("Parece que todavía no tiene viajes")
@@ -97,6 +97,9 @@ function MostrarUsuario(props) {
         }
     }, [])
 
+
+
+    //UseEffect encargado de cambiar en caso de que el token se refresque y re-renderice en caso de teneremail verificado o no
     useEffect(() => {
 
         if (props.contenidoTokenUser.payload.email_verified) {

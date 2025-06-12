@@ -107,7 +107,8 @@ function GestionarCompra(props) {
         }
 
 
-
+        //Comprueba la existencia de un vuelo similar, añade el vuelo con información adicional y 
+        //cambia el número de billetes del vuelo original
         async function comprobacionDeEnvioFormularioDeCompra() {
 
             setMostrarCargandoDatos(<div className="sticky inset-0 bg-grey bg-opacity-50 flex items-center justify-center z-[40]">
@@ -262,6 +263,9 @@ function GestionarCompra(props) {
             setChecked(event.target.checked)
         }
 
+
+
+        //gestiona el método de pago elegido
         const handleChangeMetodoDePago = (opcion) => {
 
             switch (opcion) {

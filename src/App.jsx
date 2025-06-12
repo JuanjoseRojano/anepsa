@@ -3,12 +3,13 @@ import { getMongoDB } from './funcionalidades/obtenerAPI'
 import Cargando from './components/cargando'
 import NavPrincipal from './components/nav/navPrincipal'
 import Cuerpo from './components/cuerpo/cuerpo'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google"
+import { BrowserRouter as Router } from "react-router-dom"
+import { GoogleOAuthProvider, googleLogout } from "@react-oauth/google"
+import ComponenteFooter from './components/componenteFooter'
 
 import './index.css'
 import './App.css'
-import ComponenteFooter from './components/componenteFooter'
+
 function App() {
   const [usuarios, setUsuarios] = useState(null)
   const [viajes, setViajes] = useState(null)
@@ -18,7 +19,7 @@ function App() {
 
   const clientId = '921909523929-c1t5r0ugve17ahbaujg8kqh3vbtt1ri8.apps.googleusercontent.com'
 
-
+  // UseEffect para el control de la cuenta de usuario al salir
   useEffect(() => {
     const handleBeforeUnload = () => {
       setUsuarioConectado(null)
@@ -28,10 +29,9 @@ function App() {
       sessionStorage.clear()
     }
     window.addEventListener('beforeunload', handleBeforeUnload)
-
   }, [])
 
-
+  //Funciones para obtener datos
   const getUsuarios = async () => {
     const data = await getMongoDB("/Usuarios")
     setUsuarios(data)
@@ -44,6 +44,7 @@ function App() {
 
   }
 
+  //Funciones para el refresco de información
   const getUsuarioConectado = async () => {
     const data = await getMongoDB("/Usuarios")
     setUsuarioConectado(data.find(usuario =>
@@ -52,7 +53,6 @@ function App() {
   }
 
   const refrescarInformacion = async () => {
-    console.log("Refrescado")
     getUsuarios()
     getViajes()
     if (usuarioConectado !== null) {
@@ -80,10 +80,13 @@ function App() {
     return (<>
 
       <Router>
+
         <GoogleOAuthProvider clientId={clientId}>
+
           <div >
 
             <NavPrincipal usuarioConectado={usuarioConectado} setUsuarioConectado={setUsuarioConectado} contenidoTokenUser={contenidoTokenUser} />
+
             <Cuerpo viajes={viajes}
               setViajes={setViajes}
               usuarioConectado={usuarioConectado}
@@ -96,7 +99,9 @@ function App() {
               setUsuarioConectadoVuelos={setUsuarioConectadoVuelos}
             />
           </div>
+
           <div className='mt-96'>
+
             <ComponenteFooter />
           </div>
         </GoogleOAuthProvider>

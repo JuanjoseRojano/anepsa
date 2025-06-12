@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-//=0 es para dar valor inicial si no pasamos nada
 const useManejoBilletes = (valorInicial = 0, numeroDeAsientosRestantes = 0) => {
     const [manejoBilletes, setManejoBilletes] = useState(valorInicial)
 
+    //Funciones para aumentar disminuir el numero de billetes
     const sumar = () => {
         if (manejoBilletes <= numeroDeAsientosRestantes) {
             setManejoBilletes(manejoBilletes + 1)

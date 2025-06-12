@@ -23,6 +23,7 @@ function Cuerpo(props) {
     const subtitulo2 = "Los aviones más seguros y cómodos del mundo"
     const texto2 = "La seguridad de nuestros pasajeros es nuestra máxima prioridad. Nuestro equipo de pilotos altamente capacitados y el mantenimiento regular de nuestras aeronaves aseguran que su vuelo sea lo más seguro posible."
 
+    //componente para mostrar un login de manera predeterminada
     const [componenteUsuario, setComponenteUsuario] = useState(<Login usuarioConectado={props.usuarioConectado}
         setUsuarioConectado={props.setUsuarioConectado}
         usuarios={props.usuarios}
@@ -36,7 +37,8 @@ function Cuerpo(props) {
 
     const [error, setError] = useState("");
 
-
+    //UseEffect que permite cambiar el componente del usuario el cual se envia en la ruta
+    //ademas apunta a props.usuarioConectado
     useEffect(() => {
 
         if (props.usuarioConectado === null) {

@@ -6,7 +6,7 @@ import Boton from '../../Boton'
 import DatePickerCalendario from '../reservarVuelos/datePickerCalendario'
 import Checkbox from '@mui/material/Checkbox'
 import Cargando from '../../cargando'
-import { getMongoDB, putMongoDB, deleteMongoDB } from '../../../funcionalidades/obtenerAPI';
+import { getMongoDB, putMongoDB, deleteMongoDB } from '../../../funcionalidades/obtenerAPI'
 
 
 
@@ -20,7 +20,7 @@ function TarjetasMisViajesEditable(props) {
     const [nuevaSalida, setNuevaSalida] = useState(props.element.salida)
     const [nuevoHorarioDeVuelo, setNuevoHorarioDeVuelo] = useState(props.element.horarioDeVuelo)
     const [checked, setChecked] = useState(props.element._idaYVuelta)
-    const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false);
+    const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false)
 
 
     const { precioDeLosBilletes, añadirIVA } = usePrecioDeLosBilletes(parseInt(props.element.precioTotal))
@@ -46,16 +46,19 @@ function TarjetasMisViajesEditable(props) {
         añadirIVA(parseInt(manejoBilletes), parseInt(props.element.precioDelVuelo))
     }, [manejoBilletes])
 
-
+    //manejo de checkbox de material MUI, no es un checkbox normal 
     const handleChange = (event) => {
         if (checked === true) {
         }
         else {
-
         }
         setChecked(event.target.checked)
     }
 
+
+
+    //funcion para especificar que vuelo fue seleccionado mediante el select, este tiene de valor predeterminado
+    //la salida previamente seleciconada por el usuario
     const selectViajeEditable = (e, setCambiarValor) => {
         setCambiarValor(e.target.value)
     }
@@ -68,6 +71,9 @@ function TarjetasMisViajesEditable(props) {
             fechaDeViajeDeUsuarioPrevios.getDate() === fechaDelVuelo.getDate())
     }
 
+
+
+    //funcion para eliminar el billete y devolver los billetes al viaje antes de su completa eliminación
     async function eliminarBillete() {
         setMostrarCargandoDatos(
             <div className="fixed inset-0   flex items-center justify-center z-50">
@@ -76,8 +82,8 @@ function TarjetasMisViajesEditable(props) {
                     textoCargando={"Actualizando base de datos"} />
             </div>)
 
-        const usuariosActuales = await getMongoDB("/Usuarios");
-        const viajesActuales = await getMongoDB("/Viajes");
+        const usuariosActuales = await getMongoDB("/Usuarios")
+        const viajesActuales = await getMongoDB("/Viajes")
 
         const usuarioEncontrado = usuariosActuales.find(usuario =>
             usuario._id === props.usuarioConectado._id
@@ -111,6 +117,8 @@ function TarjetasMisViajesEditable(props) {
     }
 
 
+    //comprueba la información cambiada por el usuario, en caso de ser diferente y no coincidir con otros viajes
+    //los edita refrescando ademas la información
     async function comprobacionDeActualizacion() {
 
         if (manejoBilletes != 0) {
@@ -121,8 +129,8 @@ function TarjetasMisViajesEditable(props) {
                         textoCargando={"Actualizando base de datos"} />
                 </div>)
             let enviarFormulario = true
-            const usuariosActuales = await getMongoDB("/Usuarios");
-            const viajesActuales = await getMongoDB("/Viajes");
+            const usuariosActuales = await getMongoDB("/Usuarios")
+            const viajesActuales = await getMongoDB("/Viajes")
 
             const usuarioEncontrado = usuariosActuales.find(usuario =>
                 usuario._id === props.usuarioConectado._id
@@ -171,7 +179,8 @@ function TarjetasMisViajesEditable(props) {
                     numeroDeBilletes: manejoBilletes,
                     idaYVuelta: checked
                 }
-
+                //Este switch se encarga de decidir si se restan suman o se mantienen los billetes
+                //a la hora de realizar cambios en la base de datos
                 switch (true) {
                     case (props.element.numeroDeBilletes < manejoBilletes):
                         await putMongoDB(`/Viajes/${viajeEncontrado._id}`, { numeroDeAsientosRestantes: viajeEncontrado.numeroDeAsientosRestantes - (manejoBilletes - props.element.numeroDeBilletes) })

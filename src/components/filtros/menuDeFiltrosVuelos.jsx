@@ -8,18 +8,19 @@ function MenuDeFiltrosVuelos(props) {
     const [limpiar, setLimpiar] = useState(0)
     const [altoDinamico, setAltoDinamico] = useState(window.innerHeight - 250)
 
-
+    //funcion para forzar re-renderizado al pulsar el boton de filtros
     function mostrarMenuDeFiltrosDesplegable() {
         setMostrarOcultarMenu(prev => !prev)
     }
 
+    //funcion para forzar re-renderizado al pulsar el boton de filtros
     function limpiarFiltrosYLista() {
         props.setOpcionesDeVuelo(null)
 
         setLimpiar(limpiar + 1)
     }
 
-
+    //evento para ajustar el tamaño del menu de filtros al cambiar de alto
     window.addEventListener('resize', () => {
         setAltoDinamico(window.innerHeight - 250)
     })

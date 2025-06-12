@@ -7,7 +7,7 @@ function DestinoAleatorio(props) {
 
 
 
-
+    //Cuenado encuentra viajes muestra destino aleatorios
     useEffect(() => {
 
         function seleccionarDestinoAleatorio() {

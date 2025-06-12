@@ -4,7 +4,7 @@ function ErrorGeneral(props) {
 
     const [colorDeFondo, setColorDeFondo] = useState(" bg-red-100 border border-red-400 text-red-700")
 
-
+    //UseEffect para dividir entre proceso con exito o sin exito al mostrar error
     useEffect(() => {
         if (props.error === "Proceso finalizado con exito") {
             setColorDeFondo("bg-green-100 border border-green-400 text-green-700")
@@ -13,6 +13,8 @@ function ErrorGeneral(props) {
             setColorDeFondo(" bg-red-100 border border-red-400 text-red-700")
         }
 
+
+        //Timeout para cerrar la alerta tras unos segundos
         const timerError = setTimeout(() => {
             props.setError("")
         }, 2000)

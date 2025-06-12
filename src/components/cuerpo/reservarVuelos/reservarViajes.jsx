@@ -8,6 +8,8 @@ function ReservarViajes(props) {
 
     const [opcionesDeVuelos, setOpcionesDeVuelo] = useState(null)
     const [renderizarProductos, setRenderizarProductos] = useState(null)
+
+    //esta variable de estado guarda la información de todos los filtros utilizados
     const [tipoDeFiltro, setTipoDeFiltro] = useState({
         destino: "",
         salida: "",
@@ -16,6 +18,9 @@ function ReservarViajes(props) {
         max: "",
     })
 
+
+
+    //Permite cambiar el contenido según cambien los filtros
     function cambiarTipoDeFiltroFunction(tipoDeFiltro, input) {
 
         setTipoDeFiltro(prev => ({
@@ -24,6 +29,9 @@ function ReservarViajes(props) {
         }))
     }
 
+
+
+    //Permite cambiar a la vez 2 filtros, especialmente utilizado por los precios max y min
     function cambiar2TiposDeFiltrosFunction(tipoDeFiltro1, input1, tipoDeFiltro2, input2) {
 
         setTipoDeFiltro(prev => ({
@@ -34,6 +42,11 @@ function ReservarViajes(props) {
     }
 
 
+
+    //UseEffec que apunta a los vuelos que se renderizan por la búsqueda de filtros y los que se renderizan 
+    //nada más entrar, apunta a opciones de vuelo ya que nada más entrar en esta parte de la página
+    //se aplican los filtros vacios (o mas bien casi, vacios)
+    //ademas maneja errores como vuelos no encontrados
     useEffect(() => {
 
         if (opcionesDeVuelos === null || JSON.stringify(opcionesDeVuelos) === JSON.stringify(props.viajes) && tipoDeFiltro.numeroDeAsientosRestantes === "") {

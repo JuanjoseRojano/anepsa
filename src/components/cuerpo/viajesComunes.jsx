@@ -15,6 +15,9 @@ function ViajesComunes(props) {
     const [localizacion, useLocalizacion] = useState(null)
     const [numeroViajes, useNumeroViajes] = useState(null)
 
+
+    //UseEffect que nada mas montar el componente y o cambiar los viajes se actualiza permitiendo mostrar
+    //los 10 viajes mas comunes ordenados
     useEffect(() => {
         let valoresChart = new Map()
 

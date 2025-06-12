@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import TarjetasMisViajesEditable from './tarjetasMisViajesEditable';
+import { BrowserRouter as Link, Navigate } from "react-router-dom"
+import TarjetasMisViajesEditable from './tarjetasMisViajesEditable'
 
-import { isBefore } from 'date-fns';
+import { isBefore } from 'date-fns'
 
 function TusViajes(props) {
 
-
+    //funcion que separa los viajes editables de los no editables
     const separarTarjetas = (element) => {
 
 
@@ -50,6 +50,7 @@ function TusViajes(props) {
                     setError={props.setError}
                 />)
                 break
+            //Estos otros case los decidí mantener para mostrar algo diferente, sin embargo mantengo la duda de si es buena idea
             case 1:
 
                 break
@@ -61,7 +62,7 @@ function TusViajes(props) {
 
     }
 
-
+    //Redirige al usuario a /Sesion en caso de que el usuario no este registrado
     if (props.usuarioConectado === null) {
         return (<Navigate to='../Sesion'></Navigate>)
     }

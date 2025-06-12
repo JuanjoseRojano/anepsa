@@ -1,5 +1,7 @@
+//Ruta para el acceso a la api, solo una parte comun para ir a cualquier endpoint
 const rutaPrincipal = "https://api-viajes-next.vercel.app/api"
 
+//Funcion para los filtros de busqueda, cambia tanto la lista de los filtros como la información a mostrar
 export function filtrosDeBusqueda(
     viajesSinFiltrar,
     setOpcionesDeVuelo,
@@ -57,6 +59,8 @@ export function filtrosDeBusqueda(
 }
 
 
+
+//Funcion para decodificar y fragmentar el token HTTPOnly
 export function decodedToken(token) {
     try {
         const [headerB64, payloadB64, signatureB64] = token.split('.')
@@ -81,6 +85,8 @@ export function decodedToken(token) {
 }
 
 
+
+//Funcion para obtener datos a traves de ruta especifica
 export async function getMongoDB(ruta) {
     try {
         const response = await fetch(`${rutaPrincipal}${ruta}`, {
@@ -98,6 +104,8 @@ export async function getMongoDB(ruta) {
 }
 
 
+
+//Funcion para eliminar datos a traves de ruta especifica
 export async function deleteMongoDB(ruta) {
     try {
         const response = await fetch(`${rutaPrincipal}${ruta}`, {
@@ -118,6 +126,7 @@ export async function deleteMongoDB(ruta) {
 
 
 
+//Funcion para añadir datos a traves de ruta especifica
 export async function postMongoDB(ruta, data) {
     try {
         console.log(data)
@@ -143,8 +152,7 @@ export async function postMongoDB(ruta, data) {
 
 
 
-
-
+//Funcion para modificar datos a traves de ruta especifica
 export async function putMongoDB(ruta, data) {
     try {
         console.log(data)

@@ -14,7 +14,11 @@ function FiltroDeBusquedaSlideBar(props) {
 
     const [activarODesactivarBotonInputPrecio, setActivarODesactivarBotonInputPrecio] = useState(true)
 
+    //Esta variable de estado se re-renderiza para así cambiar ambas al mismo tiempo o apuntar en useeffect
+    //a ambas variables de estado al mismo tiempo
+    //tambien permite agregar numeros predeterminados al slider en el primer renderizado
     const [valorSlider, setValorSlider] = useState([valorMinViajes, valorMaxViajes])
+    //est variable se encuentra para evitar fallos con el resto de filtros
     const [listaFiltrada, setListaFiltrada] = useState(null)
 
     const controlRefMax = useRef(null)
@@ -23,10 +27,7 @@ function FiltroDeBusquedaSlideBar(props) {
     const [controlRefActualizarPorBoton, setControlRefActualizarPorBoton] = useState(false)
     const [antiAsincronia, setAntiAsincronia] = useState(0)
 
-
-    useEffect(() => {
-    }, [valorSlider])
-
+    //UseEffect encargado de limpiar contenido el cual apunta a props.limpiar
     useEffect(() => {
         const valorLimiteMaximo = props.viajes.reduce((max, viaje) => viaje.precio > max ? viaje.precio : max, props.viajes[0].precio) + 10
         const valorLimiteMinimo = props.viajes.reduce((min, viaje) => viaje.precio < min ? viaje.precio : min, props.viajes[0].precio) - 10
@@ -39,7 +40,7 @@ function FiltroDeBusquedaSlideBar(props) {
 
     }, [props.limpiar])
 
-
+    //funcion pendiente de que falte o no información para habilitar o desabilitar boton de filtrar por precio
     function activarDesactivarBoton(controlRefMax, controlRefMin) {
 
         if (controlRefMax.current.value === "" || controlRefMin.current.value === "") {
@@ -51,7 +52,7 @@ function FiltroDeBusquedaSlideBar(props) {
 
     }
 
-
+    //funcion para cambiar el slider en caso de que el usuario decida usar los inputs para filtrar por precio
     function controlDelSliderMedianteInputs(controlRefMax, controlRefMin) {
 
         const valorMax = props.viajes.reduce((max, viaje) => viaje.precio > max ? viaje.precio : max, props.viajes[0].precio) + 10
@@ -89,17 +90,18 @@ function FiltroDeBusquedaSlideBar(props) {
         }
     }
 
-
+    //Esta funcion evita bucles para mostrar información del precio y valores predeterminados
     function valuetext(value) {
         return value
     }
 
+    //esta funcion permite gestionar los cambios del slider de precios
     const movimientoSlider = (newValue, activeThumb) => {
 
 
         switch (activeThumb) {
 
-
+            //Case 0, se mueve el selector izquierdo
             case 0:
                 const nuevoMin = Math.min(newValue[0], Number(valorSlider[1]) - 10)
                 setValorSlider([nuevoMin, valorSlider[1]])
@@ -107,7 +109,7 @@ function FiltroDeBusquedaSlideBar(props) {
 
                 filtrosDeBusqueda(props.viajes, props.setOpcionesDeVuelo, props.tipoDeFiltro, setListaFiltrada, props.datoAfiltrar, setAntiAsincronia)
                 break
-
+            //Case 1, se mueve el selector derecho
             case 1:
                 const nuevoMax = Math.max(newValue[1], Number(valorSlider[0]) + 10)
                 setValorSlider([valorSlider[0], nuevoMax])
@@ -118,11 +120,13 @@ function FiltroDeBusquedaSlideBar(props) {
                     setAntiAsincronia)
                 break
 
+            //Case 2 cambia ambos selectores devolviendo su estado original
             case 2:
                 setValorSlider([newValue[0], newValue[1]])
 
                 break
 
+            //Case 3 cambia ambos selectores con la informacion de los inputs
             case 3:
                 setValorSlider([newValue[0], newValue[1]])
 
@@ -136,6 +140,8 @@ function FiltroDeBusquedaSlideBar(props) {
         }
     }
 
+
+    //Habilitar boton en caso de detactar informacion
     useEffect(() => {
 
         if (controlRefActualizarPorBoton === true) {
@@ -152,6 +158,10 @@ function FiltroDeBusquedaSlideBar(props) {
 
     }, [props.tipoDeFiltro])
 
+
+
+    //UseEffect para inicializar precios al detectarlos vacios, esto evita problemas de valores nulos
+    //y p`roblemas al re-renderizar y filtrar campos nullos o undefine
     useEffect(() => {
 
         if (props.tipoDeFiltro.min === "") {

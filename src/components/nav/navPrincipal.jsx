@@ -12,7 +12,7 @@ export default function NavPrincipal(props) {
     const [loginMostrarUser, setLoginMostrarUser] = useState(null)
     const [menuOpen, setMenuOpen] = useState(false)
 
-
+    //UseEffect que apunta al usuario conectado, al cambiar su valor cambia el contenido del inicio de sesion
     useEffect(() => {
 
         if (props.usuarioConectado === null) {
@@ -24,13 +24,10 @@ export default function NavPrincipal(props) {
         } else {
 
             setLoginMostrarUser(
-
                 <Link to="/Sesion" onClick={() => { setMenuOpen(false) }}>
                     <SeccionNav imagenNav={props.contenidoTokenUser.payload.picture} nombreSeccionNav={props.contenidoTokenUser.payload.name} />
                 </Link>
             )
-
-
         }
     }, [props.usuarioConectado])
 

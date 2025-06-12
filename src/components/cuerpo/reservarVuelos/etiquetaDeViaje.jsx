@@ -1,6 +1,6 @@
 import { useState, } from 'react'
-import SelectViajes from '../../selectViajes';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import SelectViajes from '../../selectViajes'
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation, useNavigate } from "react-router-dom"
 
 
 function EtiquetaDeViaje(props) {
@@ -8,8 +8,9 @@ function EtiquetaDeViaje(props) {
 
     const navigate = useNavigate()
 
+
+    //funcion que redirige con en contenido del vuelo a comprar
     function realizarCompra(e) {
-        console.log("error?")
         e.preventDefault()
         props.setVueloAComprar(props.element)
         navigate('/ReservarViajes/ComprarBillete')

@@ -1,14 +1,16 @@
 import { useState } from 'react'
 
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google"
+import { GoogleLogin } from "@react-oauth/google"
 import { decodedToken, getMongoDB, postMongoDB, deleteMongoDB, putMongoDB } from "../../funcionalidades/obtenerAPI"
 import fondoLogIn from "../../media/fondoLogIn.jpg"
 import { isBefore } from 'date-fns'
 import Cargando from '../cargando'
+
 function Login(props) {
 
-    const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false);
+    const [mostrarCargandoDatos, setMostrarCargandoDatos] = useState(false)
 
+    //Funcion encargada de borrar viajes caducados
     async function eliminarViajePorFecha(usuarioEncontrado) {
 
 
@@ -20,7 +22,9 @@ function Login(props) {
             return isBefore(fechaVuelo, fechaActual)
         })
 
-
+        //Devolvemos una promesa pues al necesitar recorrer todo su contenido, puede que
+        //tarde unos segundos en realizarse las eliminaciones, de este modo me aseguro que cada viaje
+        //se compara y elimina a tiempo antes de que se muestren
         return Promise.all(
 
             viajesAEliminar.map(async (element) => {
@@ -30,7 +34,7 @@ function Login(props) {
             }))
     }
 
-
+    //Funcion la cual debe ser añadida a GoogleLogin para comenzar el proceso de inicio de sesion
     function iniciarSesion(response) {
 
         setMostrarCargandoDatos(<div className="sticky inset-0 bg-grey bg-opacity-50 flex items-center justify-center z-[40]">
@@ -40,6 +44,10 @@ function Login(props) {
 
         const informacionUsuarioDecodificada = decodedToken(response.credential)
 
+
+
+        //busca un usuario, al no encontrarlo directamente lo crea usando el email como clave
+        //en caso de encontrarlo dispara la busqueda de viajes y actualiza las variables de estado
         const buscarUsuario = async () => {
             const usuariosActuales = await getMongoDB("/Usuarios")
             const usuarioEncontrado = usuariosActuales.find(usuario => usuario.email == informacionUsuarioDecodificada.payload.email)
@@ -73,10 +81,10 @@ function Login(props) {
         return () => clearTimeout(timer)
     }
 
-
+    //funcion pasada a GoogleLogin para mostrar un error al iniciar sesion
     function errorInicioSesion(e) {
         e.preventDefault()
-        props.setError("Problema al iniciar sesion")
+        props.setError("Error al iniciar sesion revise sus credenciales")
     }
 
 
