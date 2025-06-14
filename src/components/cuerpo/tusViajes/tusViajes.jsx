@@ -7,6 +7,7 @@ import { isBefore } from 'date-fns'
 function TusViajes(props) {
 
     const [contenidoTusViajes, setContenidoTusViajes] = useState(null)
+    const [contenedoresDivPrincipal, setContenedoresDivPrincipal] = useState([])
 
     useEffect(() => {
         separarTarjetas()
@@ -57,22 +58,22 @@ function TusViajes(props) {
                 switch (renderizarBilleteEditableONoEditable) {
 
                     case 0:
+                        setContenedoresDivPrincipal([`flex justify-center items-center min-h-screen p-3`, `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4  justify-center p-3`])
+                        listaComponentesEditables.push(
 
-                        listaComponentesEditables.push(<><div className="flex justify-center items-center min-h-screen p-3">
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4  justify-center p-3">
-                                <TarjetasMisViajesEditable
-                                    element={element}
-                                    usuarioConectado={props.usuarioConectado}
-                                    setUsuarioConectado={props.setUsuarioConectado}
-                                    usuarios={props.Usuarios}
-                                    setUsuarios={props.setUsuarios}
-                                    viajes={props.viajes}
-                                    setViajes={props.setViajes}
-                                    setError={props.setError}
-                                />
-                            </div>
-                        </div></>)
+                            <TarjetasMisViajesEditable
+                                element={element}
+                                usuarioConectado={props.usuarioConectado}
+                                setUsuarioConectado={props.setUsuarioConectado}
+                                usuarios={props.Usuarios}
+                                setUsuarios={props.setUsuarios}
+                                viajes={props.viajes}
+                                setViajes={props.setViajes}
+                                setError={props.setError}
+                            />
+
+                        )
 
                         break
                     //Estos otros case los decidí mantener para mostrar algo diferente, sin embargo mantengo la duda de si es buena idea
@@ -83,16 +84,16 @@ function TusViajes(props) {
                         break
                 }
             })
-            console.log(listaComponentesEditables)
             if (listaComponentesEditables.length === 0 || props.usuarioConectado.viajes.length === 0) {
-                setContenidoTusViajes(<div className="flex flex-col items-center mt-6">
+                setContenedoresDivPrincipal([`flex flex-col items-center mt-6`, ``])
+                setContenidoTusViajes(<>
                     <h2 className="text-xl text-gray-600">Sin viajes posibles de actualizar, pulsa <span className='text-blue-400 hover:font-bold hover:text-blue-500'><Link to="/ReservarViajes">Aquí</Link></span> para comprar alguno</h2>
                     <img
                         src="https://blog.selfbank.es/wp-content/uploads/2018/03/iStock-584759976.jpg"
                         alt="Sin viajes"
                         className="mt-4 w-96 h-auto rounded-lg shadow-md"
                     />
-                </div>)
+                </>)
             }
             else {
                 setContenidoTusViajes(listaComponentesEditables)
@@ -102,7 +103,13 @@ function TusViajes(props) {
 
     return (
         <>
-            {contenidoTusViajes}
+            <div className={`${contenedoresDivPrincipal[0]}`}>
+                <div className={`${contenedoresDivPrincipal[1]}`}>
+
+                    {contenidoTusViajes}
+                </div>
+            </div>
+
         </>
     )
 }
