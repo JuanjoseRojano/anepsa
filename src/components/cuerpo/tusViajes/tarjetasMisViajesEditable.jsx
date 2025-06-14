@@ -274,7 +274,7 @@ function TarjetasMisViajesEditable(props) {
                         inputProps={{ "aria-label": "controlled" }}
                     />
                 </div>
-                <p className="text-gray-600 mt-2">Precio original: {props.element.precioDelVuelo}€ </p>
+                <p className="text-gray-600 mt-2">Precio original: {props.element.precioDelVuelo} </p>
                 <p className="text-gray-600 mt-1">Precio final:                                                     {precioDeLosBilletes * (checked ? 2 : 1)}
                     €</p>
             </div>
@@ -307,5 +307,3 @@ function TarjetasMisViajesEditable(props) {
 }
 
 export default TarjetasMisViajesEditable
-
-
